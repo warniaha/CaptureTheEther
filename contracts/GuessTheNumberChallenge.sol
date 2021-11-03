@@ -1,9 +1,9 @@
-pragma solidity ^0.4.21;
+pragma solidity 0.4.21;
 
 contract GuessTheNumberChallenge {
     uint8 answer = 42;
 
-    constructor() public payable {
+    function GuessTheNumberChallenge() public payable {
         require(msg.value == 1 ether);
     }
 

@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.blockNumber {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}

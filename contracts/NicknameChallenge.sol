@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity 0.4.21;
 
 contract CaptureTheEther {
     mapping (address => bytes32) public nicknameOf;
@@ -15,7 +15,7 @@ contract NicknameChallenge {
     address player;
 
     // Your address gets passed in as a constructor parameter.
-    constructor(address _player) public {
+    function NicknameChallenge(address _player) public {
         player = _player;
     }
 

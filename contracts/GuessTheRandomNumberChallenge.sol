@@ -1,12 +1,13 @@
 pragma solidity 0.4.21;
 
-contract GuessTheSecretNumberChallenge {
-    bytes32 answerHash = 0xdb81b4d58595fbbbb592d3661a34cdca14d7ab379441400cbfa1b78bc447c365;
+contract GuessTheRandomNumberChallenge {
+    uint8 answer;
 
-    function GuessTheSecretNumberChallenge() public payable {
+    function GuessTheRandomNumberChallenge() public payable {
         require(msg.value == 1 ether);
+        answer = uint8(keccak256(block.blockhash(block.number - 1), now));
     }
-    
+
     function isComplete() public view returns (bool) {
         return address(this).balance == 0;
     }
@@ -14,7 +15,7 @@ contract GuessTheSecretNumberChallenge {
     function guess(uint8 n) public payable {
         require(msg.value == 1 ether);
 
-        if (keccak256(n) == answerHash) {
+        if (n == answer) {
             msg.sender.transfer(2 ether);
         }
     }
