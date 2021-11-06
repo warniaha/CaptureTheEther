@@ -22,15 +22,14 @@ contract PredictHashHelper {
     address otherContract;
 
     function PredictHashHelper() public {
-        otherContract = 0xd20FF949eb2A487823828B9E14Ab39cF8C31eb11; // ropsten GuessTheNewNumberChallenge contract
-        // otherContract = 0x1F18BFB172b372BFA525E4cA35644e71778e4069; // dev
+        otherContract = 0;  // changed during deployment
     }
 
-    function setPredictTheBlockHashChallengeContract(address newAddr) public {
+    function setOtherContract(address newAddr) public {
         otherContract = newAddr;
     }
 
-    function getPredictTheBlockHashChallengeContract() public view returns (address) {
+    function getOtherContract() public view returns (address) {
         return otherContract;
     }
 

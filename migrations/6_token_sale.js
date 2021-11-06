@@ -1,9 +1,17 @@
 const TokenSaleChallenge = artifacts.require("TokenSaleChallenge");
 const TokenSaleHelper = artifacts.require("TokenSaleHelper");
+const TokenWhaleChallenge = artifacts.require("TokenWhaleChallenge");
+const TokenWhaleHelper = artifacts.require("TokenWhaleHelper");
 
 module.exports = function (deployer, network, accounts) {
-//   deployer.deploy(TokenSaleChallenge, accounts[0], { from: accounts[0], value: "1000000000000000000" });
-  deployer.deploy(TokenSaleHelper, { from: accounts[0] });
+  // var networkType = web3.eth.net.getNetworkType();
+  // if (networkType === 'private')
+  //   deployer.deploy(TokenSaleChallenge, accounts[0], { from: accounts[0], value: "1000000000000000000" });
+  // deployer.deploy(TokenSaleHelper, { from: accounts[0] });
+
+  // if (networkType === 'private')
+  //   deployer.deploy(TokenWhaleChallenge, { from: accounts[0] });
+  // deployer.deploy(TokenWhaleHelper, { from: accounts[0] });
 };
 
 /*

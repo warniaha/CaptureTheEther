@@ -17,8 +17,10 @@ await predictHelper.isComplete();
 */
 
 contract PredictHelper {
-    uint8 waste;
-    address otherContract;
+    uint8 public waste;
+    address otherContract = 0;  // changed during deployment
+    uint8 guess;
+    uint256 settlementBlockNumber;
 
     function setOtherContract(address newAddr) public {
         otherContract = newAddr;
@@ -28,8 +30,16 @@ contract PredictHelper {
         return otherContract;
     }
 
-    function getAnswer(uint256 blockNum) public view returns (uint256) {
-        return uint256(keccak256(block.blockhash(blockNum - 1), now)) % 10;
+    function getGuess() public view returns (uint8) {
+        return guess;
+    }
+
+    function getSettlementBlockNumber() public view returns (uint256) {
+        return settlementBlockNumber;
+    }
+
+    function getAnswer() public view returns (uint8) {
+        return uint8(keccak256(block.blockhash(block.number - 1), now)) % 10;
     }
 
     function wasteBlock() public {
@@ -40,23 +50,28 @@ contract PredictHelper {
     }
 
     function isComplete() public view returns (bool) {
+        require(otherContract != 0);
         PredictTheFutureChallenge predictTheFutureChallenge = PredictTheFutureChallenge(otherContract);
         return predictTheFutureChallenge.isComplete();
     }
     
     function lockInGuess(uint8 n) public payable {
+        require(otherContract != 0);
+        guess = n;
+        settlementBlockNumber = block.number + 1;
         PredictTheFutureChallenge predictTheFutureChallenge = PredictTheFutureChallenge(otherContract);
         predictTheFutureChallenge.lockInGuess.value(1 ether)(n);
     }
     
     function settle() public {
+        require(otherContract != 0);
+        uint8 answer = getAnswer();
+        require(answer == guess);
         PredictTheFutureChallenge predictTheFutureChallenge = PredictTheFutureChallenge(otherContract);
         predictTheFutureChallenge.settle();
     }
 
     function withdraw() public {
-        PredictTheFutureChallenge predictTheFutureChallenge = PredictTheFutureChallenge(otherContract);
-        predictTheFutureChallenge.withdraw();
         msg.sender.transfer(address(this).balance);
     }
 }
@@ -65,9 +80,6 @@ contract PredictTheFutureChallenge {
     address guesser;
     uint8 guess;
     uint256 settlementBlockNumber;
-
-    event LockInGuess(address guesser, uint8 guess, uint256 blocknumber, uint256 settlementBlockNumber);
-    event Settle(address guesser,uint8  answer, uint256 blocknumber, uint256 settlementBlockNumber);
 
     function PredictTheFutureChallenge() public payable {
         require(msg.value == 1 ether);
@@ -84,7 +96,6 @@ contract PredictTheFutureChallenge {
         guesser = msg.sender;
         guess = n;
         settlementBlockNumber = block.number + 1;
-        emit LockInGuess(guesser, guess, block.number, settlementBlockNumber);
     }
 
     function settle() public {
@@ -93,14 +104,9 @@ contract PredictTheFutureChallenge {
 
         uint8 answer = uint8(keccak256(block.blockhash(block.number - 1), now)) % 10;
 
-        emit Settle(guesser, answer, block.number, settlementBlockNumber);
         guesser = 0;
         if (guess == answer) {
             msg.sender.transfer(2 ether);
         }
-    }
-
-    function withdraw() public {
-        msg.sender.transfer(address(this).balance);
     }
 }

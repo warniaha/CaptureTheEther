@@ -1,7 +1,7 @@
 pragma solidity ^0.4.21;
 
 contract TokenSaleHelper {
-    address otherContract;
+    address otherContract = 0x08e2E9275D6b0C546d9a42a63567a6De6Aeb5B80;
 
     event TestTokens(uint256 tokens, uint256 price, uint256 result);
 

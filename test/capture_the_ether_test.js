@@ -109,7 +109,7 @@ contract("CaptureTheEtherTest", function (accounts) {
       console.log(`blockNumCurrent < blockNumTarget: ${blockNumCurrent} < ${blockNumTarget}, waiting for ${blockNumTarget - blockNumCurrent} blocks`);
     }
   }
-  it("Needs to loop until it settles", async () => {
+  it.skip("Needs to loop until it settles", async () => {
     var predictHelper = await PredictHelper.deployed();
     predictHelper.setOtherContract('0x8642c25737134653D48AdBA27083B4B0D7DCFA2a');
     var attempts = 0;
