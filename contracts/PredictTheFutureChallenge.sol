@@ -1,5 +1,6 @@
 pragma solidity ^0.4.21;
 
+import './OtherContract.sol';
 /*
 const oneEth = web3.utils.toWei('1', 'ether');
 var predictTheFutureChallenge = await PredictTheFutureChallenge.deployed();
@@ -16,19 +17,10 @@ await predictHelper.settle();
 await predictHelper.isComplete();
 */
 
-contract PredictHelper {
+contract PredictHelper is OtherContract {
     uint8 public waste;
-    address otherContract = 0;  // changed during deployment
     uint8 guess;
     uint256 settlementBlockNumber;
-
-    function setOtherContract(address newAddr) public {
-        otherContract = newAddr;
-    }
-
-    function getOtherContract() public view returns (address) {
-        return otherContract;
-    }
 
     function getGuess() public view returns (uint8) {
         return guess;

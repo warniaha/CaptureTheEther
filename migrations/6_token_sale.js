@@ -1,17 +1,35 @@
+var fs = require('fs');
+var NetworkContracts = require('../src/networkContracts');
+
 const TokenSaleChallenge = artifacts.require("TokenSaleChallenge");
 const TokenSaleHelper = artifacts.require("TokenSaleHelper");
 const TokenWhaleChallenge = artifacts.require("TokenWhaleChallenge");
 const TokenWhaleHelper = artifacts.require("TokenWhaleHelper");
 
-module.exports = function (deployer, network, accounts) {
-  // var networkType = web3.eth.net.getNetworkType();
-  // if (networkType === 'private')
-  //   deployer.deploy(TokenSaleChallenge, accounts[0], { from: accounts[0], value: "1000000000000000000" });
-  // deployer.deploy(TokenSaleHelper, { from: accounts[0] });
+module.exports = async function (deployer, network, accounts) {
+  if (network === 'development') {
+    await deployer.deploy(TokenSaleChallenge, accounts[0], { from: accounts[0], value: "1000000000000000000" });
+    const tokenSaleChallenge = await TokenSaleChallenge.deployed();
+    NetworkContracts.networks[network].tokenSaleChallengeContract = tokenSaleChallenge.address;
+  }
+  await deployer.deploy(TokenSaleHelper, { from: accounts[0] });
+  var tokenSaleHelper = await TokenSaleHelper.deployed();
+  await tokenSaleHelper.setOtherContract(NetworkContracts.networks[network].tokenSaleChallengeContract);
+  NetworkContracts.networks[network].tokenSaleHelperContract = tokenSaleHelper.address;
 
-  // if (networkType === 'private')
-  //   deployer.deploy(TokenWhaleChallenge, { from: accounts[0] });
-  // deployer.deploy(TokenWhaleHelper, { from: accounts[0] });
+  if (network === 'development') {
+    await deployer.deploy(TokenWhaleChallenge, accounts[0], { from: accounts[0] });
+    const tokenWhaleChallenge = await TokenWhaleChallenge.deployed();
+    NetworkContracts.networks[network].TokenWhaleChallengeContract = tokenWhaleChallenge.address;
+  }
+  await deployer.deploy(TokenWhaleHelper, { from: accounts[0] });
+  var tokenWhaleHelper = await TokenWhaleHelper.deployed();
+  await tokenWhaleHelper.setOtherContract(NetworkContracts.networks[network].TokenWhaleChallengeContract);
+  NetworkContracts.networks[network].TokenWhaleHelperContract = tokenWhaleHelper.address;
+
+  // write changes to the config file
+  var newNetworkContracts = 'module.exports = ' + JSON.stringify(NetworkContracts, null, 4) + ';';
+  fs.writeFileSync('src/networkContracts.js', newNetworkContracts);
 };
 
 /*

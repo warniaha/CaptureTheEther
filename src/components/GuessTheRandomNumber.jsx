@@ -3,15 +3,19 @@ import { guessTheRandomNumberAbi } from '../abi/guesstherandomnumber_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { fromHexString } from '../utilities/hexstring';
-
-const guessTheRandomNumberContract = "0x822E9f799B02d791Bb0F65A0E527805ECe101b53";
+import NetworkContracts from '../networkContracts';
 
 export default function GuessTheRandomNumber (props) {
     const [guessTheRandomNumberInstance, setGuessTheRandomNumberInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
+    const [guessTheRandomNumberContract, setGuessTheRandomNumberContract] = React.useState();
 
-    if (props.web3 && props.accounts && !guessTheRandomNumberInstance) {
-        loadInstance(guessTheRandomNumberAbi, guessTheRandomNumberContract, setGuessTheRandomNumberInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts) {
+        const network = props.networkType === 'private' ? 'development' : props.networkType;
+        if (!guessTheRandomNumberContract)
+            setGuessTheRandomNumberContract(NetworkContracts.networks[network].guessTheRandomNumberContract);
+        if (!guessTheRandomNumberInstance && guessTheRandomNumberContract)
+            loadInstance(guessTheRandomNumberAbi, guessTheRandomNumberContract, setGuessTheRandomNumberInstance, props.accounts, props.web3);
     }
 
     const OnClickFindTheRandomNumber = async (event) => {

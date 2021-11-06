@@ -3,16 +3,21 @@ import { guessTheSecretNumberAbi } from '../abi/guessthesecretnumber_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { toHexString } from '../utilities/hexstring';
-const keccak256 = require('keccak256');
+import NetworkContracts from '../networkContracts';
 
-const guessTheSecretNumberContract = "0x95c844f9A79d0Bb7B25775dED3F1F0495d2e2520";
+const keccak256 = require('keccak256');
 
 export default function GuessTheSecretNumber (props) {
     const [guessTheSecretNumberInstance, setGuessTheSecretNumberInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
+    const [guessTheSecretNumberContract, setGuessTheSecretNumberContract] = React.useState();
 
-    if (props.web3 && props.accounts && !guessTheSecretNumberInstance) {
-        loadInstance(guessTheSecretNumberAbi, guessTheSecretNumberContract, setGuessTheSecretNumberInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts) {
+        const network = props.networkType === 'private' ? 'development' : props.networkType;
+        if (!guessTheSecretNumberContract)
+            setGuessTheSecretNumberContract(NetworkContracts.networks[network].guessTheSecretNumberContract);
+        if (!guessTheSecretNumberInstance && guessTheSecretNumberContract)
+            loadInstance(guessTheSecretNumberAbi, guessTheSecretNumberContract, setGuessTheSecretNumberInstance, props.accounts, props.web3);
     }
 
     const onClickFindNumber = () => {

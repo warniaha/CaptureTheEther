@@ -44,7 +44,24 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>Account Balance: {accountBalance}</div>
+        <table className="table table-primary table-borders">
+          <thead>
+            <tr>
+              <th>Account balance</th>
+              <th>Ethereum network</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {accountBalance}
+              </td>
+              <td>
+                {networkType}
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <table className="table table-primary table-borders">
           <thead>
             <tr>
@@ -56,16 +73,16 @@ function App() {
             </tr>
           </thead>
           <tbody>
-              <CallMe web3={web3} accounts={accounts} networkType={networkType} />
-              <ChooseAName web3={web3} accounts={accounts} networkType={networkType} />
-              <GuessTheNumber web3={web3} accounts={accounts} networkType={networkType} />
-              <GuessTheSecretNumber web3={web3} accounts={accounts} networkType={networkType} />
-              <GuessTheRandomNumber web3={web3} accounts={accounts} networkType={networkType} />
-              <GuessTheNewNumber web3={web3} accounts={accounts} networkType={networkType} />
-              <PredictTheFuture web3={web3} accounts={accounts} networkType={networkType} />
-              <PredictTheBlock web3={web3} accounts={accounts} networkType={networkType} />
-              <TokenSale web3={web3} accounts={accounts} networkType={networkType} />
-              <TokenWhale web3={web3} accounts={accounts} networkType={networkType} />
+            <CallMe web3={web3} accounts={accounts} networkType={networkType} />
+            <ChooseAName web3={web3} accounts={accounts} networkType={networkType} />
+            <GuessTheNumber web3={web3} accounts={accounts} networkType={networkType} />
+            <GuessTheSecretNumber web3={web3} accounts={accounts} networkType={networkType} />
+            <GuessTheRandomNumber web3={web3} accounts={accounts} networkType={networkType} />
+            <GuessTheNewNumber web3={web3} accounts={accounts} networkType={networkType} />
+            <PredictTheFuture web3={web3} accounts={accounts} networkType={networkType} />
+            <PredictTheBlock web3={web3} accounts={accounts} networkType={networkType} />
+            <TokenSale web3={web3} accounts={accounts} networkType={networkType} />
+            <TokenWhale web3={web3} accounts={accounts} networkType={networkType} />
           </tbody>
         </table>
       </header>

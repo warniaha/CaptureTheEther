@@ -2,15 +2,19 @@ import React from 'react';
 import loadInstance from '../utilities/loadInstance';
 import { captureTheEtherAbi } from '../abi/capturetheether_abi';
 import CaptureRow from "./CaptureRow";
-
-const pickANameContract = "0x71c46Ed333C35e4E6c62D32dc7C8F00D125b4fee";
+import NetworkContracts from '../networkContracts';
 
 export default function ChooseAName (props) {
     const [pickANameInstance, setPickANameInstance] = React.useState();
     const [isComplete] = React.useState(undefined);
+    const [pickANameContract, setPickANameContract] = React.useState();
 
-    if (props.web3 && props.accounts && !pickANameInstance) {
-        loadInstance(captureTheEtherAbi, pickANameContract, setPickANameInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts) {
+        const network = props.networkType === 'private' ? 'development' : props.networkType;
+        if (!pickANameContract)
+            setPickANameContract(NetworkContracts.networks[network].pickANameContract);
+        if (!pickANameInstance && pickANameContract)
+            loadInstance(captureTheEtherAbi, pickANameContract, setPickANameInstance, props.accounts, props.web3);
     }
 
     const OnClickPickAName = (event) => {

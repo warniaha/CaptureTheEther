@@ -2,15 +2,19 @@ import React from 'react';
 import { callmechallengeAbi } from '../abi/callmechallenge_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
-
-const callMeContract = "0x5bf22dABEC518515887DB0838D4dDc927DaaA01A";
+import NetworkContracts from '../networkContracts';
 
 export default function CallMe(props) {
     const [callMeInstance, setCallmeInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
+    const [callMeContract, setCallMeContract] = React.useState();
 
-    if (props.web3 && props.accounts && !callMeInstance) {
-        loadInstance(callmechallengeAbi, callMeContract, setCallmeInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts) {
+        const network = props.networkType === 'private' ? 'development' : props.networkType;
+        if (!callMeContract)
+            setCallMeContract(NetworkContracts.networks[network].callMeContract);
+        if (!callMeInstance && callMeContract)
+            loadInstance(callmechallengeAbi, callMeContract, setCallmeInstance, props.accounts, props.web3);
     }
 
     const OnClickCallMe = (event) => {

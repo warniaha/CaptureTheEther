@@ -29,12 +29,10 @@ export default function PredictTheFuture(props) {
         }
     
         if (!predictTheFutureChallengeInstance && predictTheFutureChallengeContract) {
-            debugger;
             loadInstance(predictTheFutureChallengeAbi, predictTheFutureChallengeContract, setPredictTheFutureChallengeInstance, props.accounts, props.web3);
         }
 
         if (!predictHelperInstance && predictHelperContract) {
-            debugger;
             loadInstance(predictHashHelperAbi, predictHelperContract, setPredictHelperInstance, props.accounts, props.web3);
         }
     }

@@ -1,6 +1,5 @@
 var fs = require('fs');
 var NetworkContracts = require('../src/networkContracts');
-// const CircularJSON = require('circular-json');
 
 const PredictTheFutureChallenge = artifacts.require("PredictTheFutureChallenge");
 const PredictHelper = artifacts.require("PredictHelper");

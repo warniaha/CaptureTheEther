@@ -3,9 +3,7 @@ import { predictHashHelperAbi } from '../abi/predicthashhelper_abi';
 import { predictTheBlockHashAbi } from '../abi/predicttheblockhashchallenge_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
-
-const predictTheBlockHashContract = "0x1E2d073a901e54A5e0152AddFE3F69B6A86e4286";
-const predictHashHelperContract = "0x7F7D37aacc9E585891E4C4FFf3F55920039cF81a";
+import NetworkContracts from '../networkContracts';
 
 export default function PredictTheBlock(props) {
     const [predictTheBlockHashInstance, setPredictTheBlockHashInstance] = React.useState();
@@ -15,14 +13,19 @@ export default function PredictTheBlock(props) {
     const [blockNumberCurrent, setBlockNumberCurrent] = React.useState();
     const [blockNumberTarget, setBlockNumberTarget] = React.useState();
     const [predictTheBlockBalance, setPredictTheBlockBalance] = React.useState(0);
+    const [predictTheBlockHashContract, setPredictTheBlockHashContract] = React.useState();
+    const [predictHashHelperContract, setPredictHashHelperContract] = React.useState();
 
     if (props.web3 && props.accounts) {
-        if (!predictTheBlockHashInstance) {
+        const network = props.networkType === 'private' ? 'development' : props.networkType;
+        if (!predictTheBlockHashContract)
+            setPredictTheBlockHashContract(NetworkContracts.networks[network].predictTheBlockHashContract);
+        if (!predictHashHelperContract)
+            setPredictHashHelperContract(NetworkContracts.networks[network].predictHashHelperContract);
+        if (!predictTheBlockHashInstance && predictTheBlockHashContract)
             loadInstance(predictTheBlockHashAbi, predictTheBlockHashContract, setPredictTheBlockHashInstance, props.accounts, props.web3);
-        }
-        if (!predictHashHelperInstance) {
+        if (!predictHashHelperInstance && predictHashHelperContract)
             loadInstance(predictHashHelperAbi, predictHashHelperContract, setPredictHashHelperInstance, props.accounts, props.web3);
-        }
     }
 
     const OnClickPredictTheBlockHash = async (event) => {

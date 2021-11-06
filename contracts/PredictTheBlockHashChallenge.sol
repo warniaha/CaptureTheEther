@@ -1,5 +1,7 @@
 pragma solidity ^0.4.21;
 
+import './OtherContract.sol';
+
 /*
 const oneEth = web3.utils.toWei('1', 'ether');
 var predictTheBlockHashChallenge = await PredictTheBlockHashChallenge.deployed();
@@ -17,21 +19,8 @@ await predictTheBlockHashChallenge.settle();
 await predictTheBlockHashChallenge.isComplete();
 */
 
-contract PredictHashHelper {
+contract PredictHashHelper is OtherContract {
     uint8 waste;
-    address otherContract;
-
-    function PredictHashHelper() public {
-        otherContract = 0;  // changed during deployment
-    }
-
-    function setOtherContract(address newAddr) public {
-        otherContract = newAddr;
-    }
-
-    function getOtherContract() public view returns (address) {
-        return otherContract;
-    }
 
     function getAnswer(uint256 blockNum) public view returns (bytes32) {
         return block.blockhash(blockNum);

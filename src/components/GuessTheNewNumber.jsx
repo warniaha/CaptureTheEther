@@ -2,15 +2,19 @@ import React from 'react';
 import { cheatTheNewNumberAbi } from '../abi/cheathenewnumber_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
-
-const cheatTheNewNumberContract = "0x822d23bB6f6839FFb44B1dfF461e8D78dEBb665b";
+import NetworkContracts from '../networkContracts';
 
 export default function GuessTheNewNumber (props) {
     const [cheatTheNewNumberInstance, setCheatTheNewNumberInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
+    const [cheatTheNewNumberContract, setCheatTheNewNumberContract] = React.useState();
 
-    if (props.web3 && props.accounts && !cheatTheNewNumberInstance) {
-        loadInstance(cheatTheNewNumberAbi, cheatTheNewNumberContract, setCheatTheNewNumberInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts) {
+        const network = props.networkType === 'private' ? 'development' : props.networkType;
+        if (!cheatTheNewNumberContract)
+            setCheatTheNewNumberContract(NetworkContracts.networks[network].cheatTheNewNumberContract);
+        if (!cheatTheNewNumberInstance && cheatTheNewNumberContract)
+            loadInstance(cheatTheNewNumberAbi, cheatTheNewNumberContract, setCheatTheNewNumberInstance, props.accounts, props.web3);
     }
 
     const OnClickFindTheNewNumber = async (event) => {

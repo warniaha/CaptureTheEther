@@ -2,22 +2,27 @@ import React from 'react';
 import { tokenSaleChallengeAbi } from '../abi/tokensalechallenge_abi';
 import { tokenSaleHelperAbi } from '../abi/tokensalehalper_abi';
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
+import NetworkContracts from '../networkContracts';
 
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 
-const tokenSaleChallengeContract = "0x08e2E9275D6b0C546d9a42a63567a6De6Aeb5B80";
-const tokenSaleHelperContract = "0xecc714609595Ac001d55a1842397a485963Ff21d";
-
 export default function TokenSale (props) {
     const [tokenSaleChallengeInstance, setTokenSaleChallengeInstance] = React.useState();
     const [tokenSaleHelperInstance, setTokenSaleHelperInstance] = React.useState();
-    const [isComplete, setIsComplete] = React.useState(undefined);
+    const [isComplete, setIsComplete] = React.useState();
+    const [tokenSaleChallengeContract, setTokenSaleChallengeContract] = React.useState(undefined);
+    const [tokenSaleHelperContract, setTokenSaleHelperContract] = React.useState(undefined);
 
     if (props.web3 && props.accounts) {
-        if (!tokenSaleChallengeInstance)
+        const network = props.networkType === 'private' ? 'development' : props.networkType;
+        if (!tokenSaleChallengeContract)
+            setTokenSaleChallengeContract(NetworkContracts.networks[network].tokenSaleChallengeContract);
+        if (!tokenSaleHelperContract)
+            setTokenSaleHelperContract(NetworkContracts.networks[network].tokenSaleHelperContract);
+        if (!tokenSaleChallengeInstance && tokenSaleChallengeContract)
             loadInstance(tokenSaleChallengeAbi, tokenSaleChallengeContract, setTokenSaleChallengeInstance, props.accounts, props.web3);
-        if (!tokenSaleChallengeInstance)
+        if (!tokenSaleChallengeInstance && tokenSaleHelperContract)
             loadInstance(tokenSaleHelperAbi, tokenSaleHelperContract, setTokenSaleHelperInstance, props.accounts, props.web3);
     }
 

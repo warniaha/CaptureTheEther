@@ -1,16 +1,8 @@
 pragma solidity ^0.4.21;
 
-contract TokenWhaleHelper {
-    address otherContract;
+import './OtherContract.sol';
 
-    function setOtherContract(address newAddr) public {
-        otherContract = newAddr;
-    }
-
-    function getOtherContract() public view returns (address) {
-        return otherContract;
-    }
-
+contract TokenWhaleHelper is OtherContract {
     function() public payable { 
     }
 

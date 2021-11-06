@@ -2,15 +2,19 @@ import React from 'react';
 import { guessTheNumberAbi } from '../abi/guessthenumber_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
-
-const guessTheNumberContract = "0xa7CB2407Eb5f407C1e0ab6f5c258aaB58037E2a0";
+import NetworkContracts from '../networkContracts';
 
 export default function GuessTheNumber (props) {
     const [guessTheNumberInstance, setGuessTheNumberInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
+    const [guessTheNumberContract, setGuessTheNumberContract] = React.useState();
 
-    if (props.web3 && props.accounts && !guessTheNumberInstance) {
-        loadInstance(guessTheNumberAbi, guessTheNumberContract, setGuessTheNumberInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts) {
+        const network = props.networkType === 'private' ? 'development' : props.networkType;
+        if (!guessTheNumberContract)
+            setGuessTheNumberContract(NetworkContracts.networks[network].guessTheNumberContract);
+        if (!guessTheNumberInstance && guessTheNumberContract)
+            loadInstance(guessTheNumberAbi, guessTheNumberContract, setGuessTheNumberInstance, props.accounts, props.web3);
     }
 
     const OnClickGuessTheNumber = (event) => {
