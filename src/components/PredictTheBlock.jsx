@@ -1,9 +1,10 @@
 import React from 'react';
-import { predictHashHelperAbi } from '../abi/predicthashhelper_abi';
-import { predictTheBlockHashAbi } from '../abi/predicttheblockhashchallenge_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { getNetworkContract } from '../utilities/networkUtilities';
+
+const predictHashHelperAbi = require('../abi/PredictHashHelper.json').abi;
+const predictTheBlockHashAbi = require('../abi/PredictTheBlockHashChallenge.json').abi;
 
 export default function PredictTheBlock(props) {
     const [predictTheBlockHashInstance, setPredictTheBlockHashInstance] = React.useState();

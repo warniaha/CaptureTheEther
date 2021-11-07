@@ -1,10 +1,11 @@
 import React from 'react';
-import { predictHashHelperAbi } from '../abi/predicthashhelper_abi';
-import { predictTheFutureChallengeAbi } from '../abi/predictthefuturechallenge_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
 import { getNetworkContract } from '../utilities/networkUtilities';
+
+const predictHelperAbi = require('../abi/PredictHelper.json').abi;
+const predictTheFutureChallengeAbi = require('../abi/PredictTheFutureChallenge.json').abi;
 
 var debugCounter = 0;
 
@@ -20,7 +21,7 @@ export default function PredictTheFuture(props) {
         if (!predictTheFutureChallengeInstance)
             loadInstance(predictTheFutureChallengeAbi, getNetworkContract(props.networkType, "predictTheFutureChallengeContract"), setPredictTheFutureChallengeInstance, props.accounts, props.web3);
         if (!predictHelperInstance)
-            loadInstance(predictHashHelperAbi, getNetworkContract(props.networkType, "predictHelperContract"), setPredictHelperInstance, props.accounts, props.web3);
+            loadInstance(predictHelperAbi, getNetworkContract(props.networkType, "predictHelperContract"), setPredictHelperInstance, props.accounts, props.web3);
     }
 
     const checkCompleted = React.useCallback(() => {

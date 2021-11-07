@@ -32,12 +32,12 @@ module.exports = async function (deployer, network, accounts) {
   //   NetworkContracts.networks[network].guessTheRandomNumberChallengeContract = guessTheRandomNumberChallenge.address;
   // }
 
-  await deployer.deploy(CheatTheNewNumber);
-  var cheatTheNewNumber = await CheatTheNewNumber.deployed();
-  await cheatTheNewNumber.setOtherContract(NetworkContracts.networks[network].guessTheNewNumberChallengeContract);
-  NetworkContracts.networks[network].cheatTheNewNumberContract = cheatTheNewNumber.address;
+  // await deployer.deploy(CheatTheNewNumber);
+  // var cheatTheNewNumber = await CheatTheNewNumber.deployed();
+  // await cheatTheNewNumber.setOtherContract(NetworkContracts.networks[network].guessTheNewNumberChallengeContract);
+  // NetworkContracts.networks[network].cheatTheNewNumberContract = cheatTheNewNumber.address;
 
-  // write changes to the config file
-  var newNetworkContracts = 'module.exports = ' + JSON.stringify(NetworkContracts, null, 4) + ';';
-  fs.writeFileSync('src/networkContracts.js', newNetworkContracts);
+  // // write changes to the config file
+  // var newNetworkContracts = 'module.exports = ' + JSON.stringify(NetworkContracts, null, 4) + ';';
+  // fs.writeFileSync('src/networkContracts.js', newNetworkContracts);
 };

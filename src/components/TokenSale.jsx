@@ -1,11 +1,11 @@
 import React from 'react';
-import { tokenSaleChallengeAbi } from '../abi/tokensalechallenge_abi';
-import { tokenSaleHelperAbi } from '../abi/tokensalehalper_abi';
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
 import { getNetworkContract } from '../utilities/networkUtilities';
-
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
+
+const tokenSaleChallengeAbi = require('../abi/TokenSaleChallenge.json').abi;
+const tokenSaleHelperAbi = require('../abi/TokenSaleHelper.json').abi;
 
 export default function TokenSale (props) {
     const [tokenSaleChallengeInstance, setTokenSaleChallengeInstance] = React.useState();

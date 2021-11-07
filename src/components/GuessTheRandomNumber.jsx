@@ -1,10 +1,11 @@
 import React from 'react';
-import { guessTheRandomNumberAbi } from '../abi/guesstherandomnumber_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { fromHexString } from '../utilities/hexstring';
 import { getNetworkContract } from '../utilities/networkUtilities';
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
+
+const guessTheRandomNumberAbi = require('../abi/GuessTheRandomNumberChallenge.json').abi;
 
 export default function GuessTheRandomNumber (props) {
     const [guessTheRandomNumberInstance, setGuessTheRandomNumberInstance] = React.useState();

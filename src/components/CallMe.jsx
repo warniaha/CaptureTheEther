@@ -1,9 +1,10 @@
 import React from 'react';
-import { callmechallengeAbi } from '../abi/callmechallenge_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { getNetworkContract } from '../utilities/networkUtilities';
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
+
+const callmechallengeAbi = require('../abi/CallMeChallenge.json').abi;
 
 export default function CallMe(props) {
     const [callMeInstance, setCallmeInstance] = React.useState();

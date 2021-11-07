@@ -1,10 +1,11 @@
 import React from 'react';
-import { cheatTheNewNumberAbi } from '../abi/cheathenewnumber_abi';
-import { guessTheNewNumberAbi } from '../abi/guessthenewnumber_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { getNetworkContract } from '../utilities/networkUtilities';
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
+
+const cheatTheNewNumberAbi = require('../abi/CheatTheNewNumber.json').abi;
+const guessTheNewNumberAbi = require('../abi/GuessTheNewNumberChallenge.json').abi;
 
 export default function GuessTheNewNumber (props) {
     const [guessTheNewNumberChallengeInstance, setGuessTheNewNumberChallengeInstance] = React.useState();

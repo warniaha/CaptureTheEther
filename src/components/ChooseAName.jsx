@@ -1,9 +1,10 @@
 import React from 'react';
 import loadInstance from '../utilities/loadInstance';
-import { captureTheEtherAbi } from '../abi/capturetheether_abi';
 import CaptureRow from "./CaptureRow";
 import { getNetworkContract } from '../utilities/networkUtilities';
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
+
+const captureTheEtherAbi = require('../abi/CaptureTheEther.json').abi;
 
 export default function ChooseAName (props) {
     const [pickANameInstance, setPickANameInstance] = React.useState();

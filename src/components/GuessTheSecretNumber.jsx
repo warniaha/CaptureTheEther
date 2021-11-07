@@ -1,11 +1,11 @@
 import React from 'react';
-import { guessTheSecretNumberAbi } from '../abi/guessthesecretnumber_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { toHexString } from '../utilities/hexstring';
 import { getNetworkContract } from '../utilities/networkUtilities';
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
 
+const guessTheSecretNumberAbi = require('../abi/GuessTheSecretNumberChallenge.json').abi;
 const keccak256 = require('keccak256');
 
 export default function GuessTheSecretNumber (props) {
