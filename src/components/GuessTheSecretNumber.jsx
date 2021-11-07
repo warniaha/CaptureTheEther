@@ -3,21 +3,19 @@ import { guessTheSecretNumberAbi } from '../abi/guessthesecretnumber_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { toHexString } from '../utilities/hexstring';
-import NetworkContracts from '../networkContracts';
+import { getNetworkContract } from '../utilities/networkUtilities';
+import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
 
 const keccak256 = require('keccak256');
 
 export default function GuessTheSecretNumber (props) {
     const [guessTheSecretNumberInstance, setGuessTheSecretNumberInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
-    const [guessTheSecretNumberContract, setGuessTheSecretNumberContract] = React.useState();
+    const [balance, setBalance] = React.useState();
 
-    if (props.web3 && props.accounts) {
-        const network = props.networkType === 'private' ? 'development' : props.networkType;
-        if (!guessTheSecretNumberContract)
-            setGuessTheSecretNumberContract(NetworkContracts.networks[network].guessTheSecretNumberContract);
-        if (!guessTheSecretNumberInstance && guessTheSecretNumberContract)
-            loadInstance(guessTheSecretNumberAbi, guessTheSecretNumberContract, setGuessTheSecretNumberInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts && props.networkType) {
+        if (!guessTheSecretNumberInstance)
+            loadInstance(guessTheSecretNumberAbi, getNetworkContract(props.networkType, "guessTheSecretNumberChallengeContract"), setGuessTheSecretNumberInstance, props.accounts, props.web3);
     }
 
     const onClickFindNumber = () => {
@@ -32,8 +30,10 @@ export default function GuessTheSecretNumber (props) {
                     guessTheSecretNumberInstance.methods.guess(loop).send({ from: props.accounts[0], value: oneEth }, function (error, txHash) {
                         if (error)
                             alert(`Failed: ${error.message}`);
-                        else
-                            alert(`Success: txHash: ${txHash}`);
+                        else {
+                            getTransactionReceipt(txHash, props.web3);
+                            checkCompleted();
+                        }
                     });
                 }
             }
@@ -48,17 +48,27 @@ export default function GuessTheSecretNumber (props) {
         return (<button disabled={!guessTheSecretNumberInstance} onClick={onClickFindNumber}>Guess the secret number</button>);
     }
 
+    const checkCompleted = () => {
+        if (props.web3 && props.accounts && guessTheSecretNumberInstance) {
+            console.log(`guessTheSecretNumber.checkCompleted`);
+            guessTheSecretNumberInstance.methods.isComplete().call().then(completed => setIsComplete(completed), 
+                err => alert(`guessTheSecretNumber.isComplete: ${err}`));
+            props.web3.eth.getBalance(guessTheSecretNumberInstance._address).then(balance => {
+                var wei = props.web3.utils.fromWei(balance);
+                setBalance(wei);
+            }, err => alert(`guessTheSecretNumber.getBalance: ${err}`));
+        }
+    }
+
     const getCompleted = () => {
-        if (isComplete === undefined) {
-            if (props.web3 && props.accounts && guessTheSecretNumberInstance) {
-                guessTheSecretNumberInstance.methods.isComplete().call().then(completed => setIsComplete(completed));
-            }
+        if (!guessTheSecretNumberInstance) {
             return "loading";
         }
+        checkCompleted();
         return isComplete ? "true" : "false";
     }
 
     return (
-        <CaptureRow name="Guess the secret number" blocks="" action={getButton()} balance="" completed={getCompleted()} />
+        <CaptureRow name="Guess the secret number" blocks="" action={getButton()} balance={balance} completed={getCompleted()} />
     );
 }

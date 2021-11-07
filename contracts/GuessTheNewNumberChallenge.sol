@@ -21,6 +21,7 @@ web3.eth.getBalance('0x3C5a99d8f3b559618e56D993E73f10e4406699d5')
 contract CheatTheNewNumber is OtherContract {
 
     function isComplete() public view returns (bool) {
+        require(otherContract != 0);
         GuessTheNewNumberChallenge guessTheNewNumberChallenge = GuessTheNewNumberChallenge(otherContract);
         bool completed = guessTheNewNumberChallenge.isComplete();
         return completed;
@@ -32,6 +33,9 @@ contract CheatTheNewNumber is OtherContract {
 
         GuessTheNewNumberChallenge guessTheNewNumberChallenge = GuessTheNewNumberChallenge(otherContract);
         guessTheNewNumberChallenge.guess.value(msg.value)(answer);
+
+        // only allow success if the guess was right
+        require(address(otherContract).balance == 0);
     }
 
     function balance() public view returns (uint256) {
@@ -40,7 +44,10 @@ contract CheatTheNewNumber is OtherContract {
         return contractBalance;
     }
 
-    function() public payable { 
+    function() public payable {
+    }
+
+    function withdraw() public { 
         msg.sender.transfer(address(this).balance);
     }
 }

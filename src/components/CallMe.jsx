@@ -2,29 +2,28 @@ import React from 'react';
 import { callmechallengeAbi } from '../abi/callmechallenge_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
-import NetworkContracts from '../networkContracts';
+import { getNetworkContract } from '../utilities/networkUtilities';
+import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
 
 export default function CallMe(props) {
     const [callMeInstance, setCallmeInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
-    const [callMeContract, setCallMeContract] = React.useState();
 
-    if (props.web3 && props.accounts) {
-        const network = props.networkType === 'private' ? 'development' : props.networkType;
-        if (!callMeContract)
-            setCallMeContract(NetworkContracts.networks[network].callMeContract);
-        if (!callMeInstance && callMeContract)
-            loadInstance(callmechallengeAbi, callMeContract, setCallmeInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts && props.networkType) {
+        if (!callMeInstance)
+            loadInstance(callmechallengeAbi, getNetworkContract(props.networkType, "callMeChallengeContract"), setCallmeInstance, props.accounts, props.web3);
     }
 
     const OnClickCallMe = (event) => {
         event.preventDefault();
         if (!isComplete) {
             callMeInstance.methods.callme().send({ from: props.accounts[0] }, function (error, txHash) {
+                debugger;
                 if (error)
                     alert(`Failed: ${error.message}`);
                 else {
-                    callMeInstance.methods.isComplete().call().then(completed => setIsComplete(completed));
+                    getTransactionReceipt(txHash, props.web3);
+                    checkCompleted();
                 }
             });
         }
@@ -32,17 +31,23 @@ export default function CallMe(props) {
             alert(`already completed`);
     }
 
+    const checkCompleted = () => {
+        if (props.web3 && callMeInstance) {
+            console.log(`CallMe.checkCompleted`);
+            callMeInstance.methods.isComplete().call().then(completed => setIsComplete(completed), 
+                err => alert(`callMe.isComplete: ${err}`));
+        }
+    }
+
     const getButton = () => {
         return (<button disabled={!callMeInstance} onClick={OnClickCallMe}>call me</button>);
     }
 
     const getCompleted = () => {
-        if (isComplete === undefined) {
-            if (props.web3 && callMeInstance) {
-                callMeInstance.methods.isComplete().call().then(completed => setIsComplete(completed))
-            }
+        if (!callMeInstance) {
             return "loading";
         }
+        checkCompleted();
         return isComplete ? "true" : "false";
     }
 

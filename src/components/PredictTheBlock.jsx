@@ -3,7 +3,7 @@ import { predictHashHelperAbi } from '../abi/predicthashhelper_abi';
 import { predictTheBlockHashAbi } from '../abi/predicttheblockhashchallenge_abi';
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
-import NetworkContracts from '../networkContracts';
+import { getNetworkContract } from '../utilities/networkUtilities';
 
 export default function PredictTheBlock(props) {
     const [predictTheBlockHashInstance, setPredictTheBlockHashInstance] = React.useState();
@@ -13,26 +13,18 @@ export default function PredictTheBlock(props) {
     const [blockNumberCurrent, setBlockNumberCurrent] = React.useState();
     const [blockNumberTarget, setBlockNumberTarget] = React.useState();
     const [predictTheBlockBalance, setPredictTheBlockBalance] = React.useState(0);
-    const [predictTheBlockHashContract, setPredictTheBlockHashContract] = React.useState();
-    const [predictHashHelperContract, setPredictHashHelperContract] = React.useState();
 
-    if (props.web3 && props.accounts) {
-        const network = props.networkType === 'private' ? 'development' : props.networkType;
-        if (!predictTheBlockHashContract)
-            setPredictTheBlockHashContract(NetworkContracts.networks[network].predictTheBlockHashContract);
-        if (!predictHashHelperContract)
-            setPredictHashHelperContract(NetworkContracts.networks[network].predictHashHelperContract);
-        if (!predictTheBlockHashInstance && predictTheBlockHashContract)
-            loadInstance(predictTheBlockHashAbi, predictTheBlockHashContract, setPredictTheBlockHashInstance, props.accounts, props.web3);
-        if (!predictHashHelperInstance && predictHashHelperContract)
-            loadInstance(predictHashHelperAbi, predictHashHelperContract, setPredictHashHelperInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts && props.networkType) {
+        if (!predictTheBlockHashInstance)
+            loadInstance(predictTheBlockHashAbi, getNetworkContract(props.networkType, "predictTheBlockHashChallengeContract"), setPredictTheBlockHashInstance, props.accounts, props.web3);
+        if (!predictHashHelperInstance)
+            loadInstance(predictHashHelperAbi, getNetworkContract(props.networkType, "predictHashHelperContract"), setPredictHashHelperInstance, props.accounts, props.web3);
     }
 
     const OnClickPredictTheBlockHash = async (event) => {
         event.preventDefault();
         if (!isComplete) {
             const oneEth = props.web3.utils.toWei('1', 'ether');
-            await predictHashHelperInstance.methods.setPredictTheBlockHashChallengeContract(predictTheBlockHashContract).call({ from: props.accounts[0] });
             var blockNumber = await props.web3.eth.getBlockNumber() + 264;
             setBlockNumberTarget(blockNumber);
             var answer = '0x0000000000000000000000000000000000000000000000000000000000000000';
@@ -44,40 +36,52 @@ export default function PredictTheBlock(props) {
             alert(`already completed`);
     }
 
-    const runBlockHash = React.useCallback(async () => {
-        if (blockNumberCurrent > blockNumberTarget) {
-            setBlockNumberHashRunning(false);
-            await predictHashHelperInstance.methods.settle().send({ from: props.accounts[0] });
-            var completed = await predictTheBlockHashInstance.methods.isComplete().call({ from: props.accounts[0] });
-            alert(completed ? `PredictTheBlockHash Failed` : `PredictTheBlockHash Success`);
-            await predictHashHelperInstance.methods.withdraw().call({ from: props.accounts[0] });
+    const checkCompleted = React.useCallback(() => {
+        if (props.web3 && props.accounts && predictTheBlockHashInstance) {
+            console.log(`predictTheBlock.checkCompleted`);
+            predictTheBlockHashInstance.methods.isComplete().call().then(completed => setIsComplete(completed), 
+                err => alert(`predictTheBlock.isComplete: ${err}`));
         }
-        else
-            setBlockNumberCurrent(await props.web3.eth.getBlockNumber());
-    }, [blockNumberCurrent, blockNumberTarget, predictTheBlockHashInstance, setBlockNumberHashRunning, props.accounts,
-        props.web3, setBlockNumberCurrent, predictHashHelperInstance]
+    }, [props.web3, props.accounts, predictTheBlockHashInstance, setIsComplete]
     );
 
     const getBlockHashBalance = React.useCallback(async () => {
         if (props.web3 && predictTheBlockHashInstance) {
+            console.log(`predictTheBlock.getBlockHashBalance`);
             props.web3.eth.getBalance(predictTheBlockHashInstance._address).then(balance => {
                 var wei = props.web3.utils.fromWei(balance);
                 setPredictTheBlockBalance(wei);
-            });
-            await predictTheBlockHashInstance.methods.isComplete().call({ from: props.accounts[0] }).then(completed => {
-                setIsComplete(completed);
-            })
+            }, 
+            err => alert(`predictTheBlock.getBalance: ${err}`));
+            checkCompleted();
         }
-    }, [setPredictTheBlockBalance, setIsComplete, props.web3, predictTheBlockHashInstance, props.accounts]);
+    }, [props.web3, predictTheBlockHashInstance, checkCompleted]
+    );
+
+    const runBlockHash = React.useCallback(async () => {
+        if (blockNumberHashRunning) {
+            if (blockNumberCurrent > blockNumberTarget) {
+                setBlockNumberHashRunning(false);
+                await predictHashHelperInstance.methods.settle().send({ from: props.accounts[0] });
+                var completed = await predictTheBlockHashInstance.methods.isComplete().call({ from: props.accounts[0] });
+                alert(completed ? `PredictTheBlockHash Failed` : `PredictTheBlockHash Success`);
+                await predictHashHelperInstance.methods.withdraw().call({ from: props.accounts[0] });
+                getBlockHashBalance();
+            }
+            else
+                setBlockNumberCurrent(await props.web3.eth.getBlockNumber());
+        }
+    }, [blockNumberCurrent, blockNumberTarget, predictTheBlockHashInstance, setBlockNumberHashRunning, props.accounts,
+        props.web3, setBlockNumberCurrent, predictHashHelperInstance, blockNumberHashRunning, getBlockHashBalance]
+    );
 
     React.useEffect(() => {
         const interval = setInterval(() => {
             if (blockNumberHashRunning)
                 runBlockHash();
-            getBlockHashBalance();
         }, 500);
         return () => clearInterval(interval);
-    }, [blockNumberHashRunning, runBlockHash, getBlockHashBalance]);
+    }, [blockNumberHashRunning, runBlockHash]);
 
     const getBlockWaitingCount = () => {
         if (blockNumberHashRunning) {
@@ -87,8 +91,6 @@ export default function PredictTheBlock(props) {
         return "-";
     }
 
-
-    
     const getButton = () => {
         return (
             <button disabled={!predictHashHelperInstance} onClick={OnClickPredictTheBlockHash}>Predict the block</button>
@@ -96,12 +98,11 @@ export default function PredictTheBlock(props) {
     }
 
     const getCompleted = () => {
-        if (isComplete === undefined) {
-            if (props.web3 && props.accounts && predictHashHelperInstance) {
-                predictTheBlockHashInstance.methods.isComplete().call().then(completed => setIsComplete(completed));
-            }
+        if (!predictTheBlockHashInstance) {
             return "loading";
         }
+        checkCompleted();
+        getBlockHashBalance();
         return isComplete ? "true" : "false";
     }
 

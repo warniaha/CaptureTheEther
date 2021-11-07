@@ -4,7 +4,7 @@ import { predictTheFutureChallengeAbi } from '../abi/predictthefuturechallenge_a
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
-import NetworkContracts from '../networkContracts';
+import { getNetworkContract } from '../utilities/networkUtilities';
 
 var debugCounter = 0;
 
@@ -15,55 +15,55 @@ export default function PredictTheFuture(props) {
     const [blockNumberRunning, setBlockNumberRunning] = React.useState(false);
     const [predictTheFutureBalance, setPredictTheFutureBalance] = React.useState(0);
     const [guess, setGuess] = React.useState();
-    const [predictTheFutureChallengeContract, setPredictTheFutureChallengeContract] = React.useState();
-    const [predictHelperContract, setPredictHelperContract] = React.useState();
 
     if (props.web3 && props.accounts && props.networkType) {
-        const network = props.networkType === 'private' ? 'development' : props.networkType;
-        if (!predictTheFutureChallengeContract) {
-            setPredictTheFutureChallengeContract(NetworkContracts.networks[network].predictTheFutureChallengeContract);
-        }
-
-        if (!predictHelperContract) {
-            setPredictHelperContract(NetworkContracts.networks[network].predictHelperContract);
-        }
-    
-        if (!predictTheFutureChallengeInstance && predictTheFutureChallengeContract) {
-            loadInstance(predictTheFutureChallengeAbi, predictTheFutureChallengeContract, setPredictTheFutureChallengeInstance, props.accounts, props.web3);
-        }
-
-        if (!predictHelperInstance && predictHelperContract) {
-            loadInstance(predictHashHelperAbi, predictHelperContract, setPredictHelperInstance, props.accounts, props.web3);
-        }
+        if (!predictTheFutureChallengeInstance)
+            loadInstance(predictTheFutureChallengeAbi, getNetworkContract(props.networkType, "predictTheFutureChallengeContract"), setPredictTheFutureChallengeInstance, props.accounts, props.web3);
+        if (!predictHelperInstance)
+            loadInstance(predictHashHelperAbi, getNetworkContract(props.networkType, "predictHelperContract"), setPredictHelperInstance, props.accounts, props.web3);
     }
 
-    const runBlockHash = React.useCallback(async () => {
-        setBlockNumberRunning(false);
-        console.log(`runBlockHash called ${debugCounter++} times`);
-        const answer = await predictHelperInstance.methods.getAnswer();
-        if (answer === guess) {
-            predictHelperInstance.methods.settle().send({ from: props.accounts[0] }, async function (error, txHash) {
-                if (error) {
-                    alert(`settle failed, you probably need to redeploy`);
-                }
-                else {
-                    getTransactionReceipt(txHash);
-                    console.log(`runBlockHash callback called`);
-                    predictHelperInstance.methods.isComplete().call().then(completed => setIsComplete(completed));
-                }
-            });
-            return;
+    const checkCompleted = React.useCallback(() => {
+        if (props.web3 && props.accounts && predictHelperInstance) {
+            console.log(`predictHelper.checkCompleted`);
+            predictHelperInstance.methods.isComplete().call().then(completed => setIsComplete(completed), 
+                err => alert(`predictHelper.isComplete: ${err}`));
         }
-        setBlockNumberRunning(true);
-    }, [setBlockNumberRunning, props.accounts, guess, predictHelperInstance]
+    }, [props.web3, props.accounts, predictHelperInstance, setIsComplete]
+    );
+
+    const runBlockHash = React.useCallback(async () => {
+        if (blockNumberRunning) {
+            if (predictHelperInstance) {
+                setBlockNumberRunning(false);
+                console.log(`runBlockHash called ${debugCounter++} times`);
+                const answer = await predictHelperInstance.methods.getAnswer();
+                if (answer === guess) {
+                    predictHelperInstance.methods.settle().send({ from: props.accounts[0] }, async function (error, txHash) {
+                        if (error) {
+                            alert(`settle failed, you probably need to redeploy`);
+                        }
+                        else {
+                            getTransactionReceipt(txHash, props.web3);
+                            checkCompleted();
+                        }
+                    });
+                    return;
+                }
+                setBlockNumberRunning(true);
+            }
+        }
+    }, [blockNumberRunning, setBlockNumberRunning, props.accounts, props.web3, guess, predictHelperInstance, checkCompleted]
     );
 
     const getBlockHashBalance = React.useCallback(async () => {
         if (props.web3 && predictTheFutureChallengeInstance) {
+            console.log(`predictTheFuture.getBlockHashBalance`);
             props.web3.eth.getBalance(predictTheFutureChallengeInstance._address).then(balance => {
                 var wei = props.web3.utils.fromWei(balance);
                 setPredictTheFutureBalance(wei);
-            });
+            }, 
+            err => alert(`predictTheFuture.getBalance: ${err}`));
         }
     }, [setPredictTheFutureBalance, props.web3, predictTheFutureChallengeInstance]);
 
@@ -71,7 +71,6 @@ export default function PredictTheFuture(props) {
         const interval = setInterval(() => {
             if (blockNumberRunning)
                 runBlockHash();
-            getBlockHashBalance();
         }, 500);
         return () => clearInterval(interval);
     }, [blockNumberRunning, runBlockHash, getBlockHashBalance]);
@@ -89,10 +88,12 @@ export default function PredictTheFuture(props) {
                     }
                     else {
                         setBlockNumberRunning(true);
+                        console.log(`predictHelper.guess`);
                         predictHelperInstance.methods.guess.call().then(n => {
                             setGuess(n);
                             console.log(`Guess: ${n}`)
-                        });
+                        }, 
+                        err => alert(`predictHelper.guess: ${err}`));
                     }
                 });
             }
@@ -130,14 +131,11 @@ export default function PredictTheFuture(props) {
     }
 
     const getCompleted = () => {
-        if (isComplete === undefined) {
-            if (props.web3 && props.accounts && predictHelperInstance) {
-                setIsComplete(false);   // so it doesn't constantly call this
-                console.log(`getCompleted called`);
-                predictHelperInstance.methods.isComplete().call().then(completed => setIsComplete(completed));
-            }
+        if (!predictHelperInstance) {
             return "loading";
         }
+        checkCompleted();
+        getBlockHashBalance();
         return isComplete ? "true" : "false";
     }
 

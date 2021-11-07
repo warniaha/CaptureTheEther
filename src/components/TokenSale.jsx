@@ -2,7 +2,7 @@ import React from 'react';
 import { tokenSaleChallengeAbi } from '../abi/tokensalechallenge_abi';
 import { tokenSaleHelperAbi } from '../abi/tokensalehalper_abi';
 import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
-import NetworkContracts from '../networkContracts';
+import { getNetworkContract } from '../utilities/networkUtilities';
 
 import loadInstance from '../utilities/loadInstance';
 import CaptureRow from "./CaptureRow";
@@ -11,19 +11,12 @@ export default function TokenSale (props) {
     const [tokenSaleChallengeInstance, setTokenSaleChallengeInstance] = React.useState();
     const [tokenSaleHelperInstance, setTokenSaleHelperInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState();
-    const [tokenSaleChallengeContract, setTokenSaleChallengeContract] = React.useState(undefined);
-    const [tokenSaleHelperContract, setTokenSaleHelperContract] = React.useState(undefined);
 
-    if (props.web3 && props.accounts) {
-        const network = props.networkType === 'private' ? 'development' : props.networkType;
-        if (!tokenSaleChallengeContract)
-            setTokenSaleChallengeContract(NetworkContracts.networks[network].tokenSaleChallengeContract);
-        if (!tokenSaleHelperContract)
-            setTokenSaleHelperContract(NetworkContracts.networks[network].tokenSaleHelperContract);
-        if (!tokenSaleChallengeInstance && tokenSaleChallengeContract)
-            loadInstance(tokenSaleChallengeAbi, tokenSaleChallengeContract, setTokenSaleChallengeInstance, props.accounts, props.web3);
-        if (!tokenSaleChallengeInstance && tokenSaleHelperContract)
-            loadInstance(tokenSaleHelperAbi, tokenSaleHelperContract, setTokenSaleHelperInstance, props.accounts, props.web3);
+    if (props.web3 && props.accounts && props.networkType) {
+        if (!tokenSaleChallengeInstance)
+            loadInstance(tokenSaleChallengeAbi, getNetworkContract(props.networkType, "tokenSaleChallengeContract"), setTokenSaleChallengeInstance, props.accounts, props.web3);
+        if (!tokenSaleChallengeInstance)
+            loadInstance(tokenSaleHelperAbi, getNetworkContract(props.networkType, "tokenSaleHelperContract"), setTokenSaleHelperInstance, props.accounts, props.web3);
     }
 
     const OnClickTokenSale = async (event) => {
@@ -36,7 +29,7 @@ export default function TokenSale (props) {
                     alert(`Failed: ${error.message}`);
                 else {
                     getTransactionReceipt(txBuy, props.web3);
-                    tokenSaleChallengeInstance.methods.isComplete().call().then(completed => setIsComplete(completed));
+                    checkCompleted();
                 }
             });
         }
@@ -48,13 +41,19 @@ export default function TokenSale (props) {
         return (<button disabled={!tokenSaleChallengeInstance && !tokenSaleHelperInstance} onClick={OnClickTokenSale}>Token sale</button>);
     }
 
+    const checkCompleted = () => {
+        if (props.web3 && props.accounts && tokenSaleChallengeInstance) {
+            console.log(`tokenSale.checkCompleted`);
+            tokenSaleChallengeInstance.methods.isComplete().call().then(completed => setIsComplete(completed), 
+                err => alert(`tokenSale.isComplete: ${err}`));
+        }
+    }
+
     const getCompleted = () => {
-        if (isComplete === undefined) {
-            if (props.web3 && props.accounts && tokenSaleChallengeInstance) {
-                tokenSaleChallengeInstance.methods.isComplete().call().then(completed => setIsComplete(completed))
-            }
+        if (!tokenSaleChallengeInstance) {
             return "loading";
         }
+        checkCompleted();
         return isComplete ? "true" : "false";
     }
 
