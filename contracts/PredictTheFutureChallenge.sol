@@ -61,6 +61,7 @@ contract PredictHelper is OtherContract {
         require(answer == guess);
         PredictTheFutureChallenge predictTheFutureChallenge = PredictTheFutureChallenge(otherContract);
         predictTheFutureChallenge.settle();
+        require(predictTheFutureChallenge.isComplete() == true);
     }
 
     function withdraw() public {

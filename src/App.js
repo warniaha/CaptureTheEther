@@ -12,6 +12,7 @@ import PredictTheFuture from './components/PredictTheFuture';
 import PredictTheBlock from './components/PredictTheBlock';
 import TokenSale from './components/TokenSale';
 import TokenWhale from './components/TokenWhale';
+import { getNetworkName } from './utilities/networkUtilities';
 
 const Web3 = require("web3");
 
@@ -57,7 +58,7 @@ function App() {
                 {accountBalance}
               </td>
               <td>
-                {networkType}
+                {getNetworkName(networkType)}
               </td>
             </tr>
           </tbody>

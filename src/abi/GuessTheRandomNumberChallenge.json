@@ -131,7 +131,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1408,
+                            "referencedDeclaration": 1600,
                             "src": "169:3:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -190,7 +190,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1411,
+                      "referencedDeclaration": 1603,
                       "src": "161:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -266,7 +266,7 @@
                                       "name": "block",
                                       "nodeType": "Identifier",
                                       "overloadedDeclarations": [],
-                                      "referencedDeclaration": 1399,
+                                      "referencedDeclaration": 1591,
                                       "src": "242:5:3",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_magic_block",
@@ -327,7 +327,7 @@
                                   "name": "block",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 1399,
+                                  "referencedDeclaration": 1591,
                                   "src": "226:5:3",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_magic_block",
@@ -368,7 +368,7 @@
                               "name": "now",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1410,
+                              "referencedDeclaration": 1602,
                               "src": "261:3:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -391,7 +391,7 @@
                             "name": "keccak256",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1402,
+                            "referencedDeclaration": 1594,
                             "src": "216:9:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
@@ -515,7 +515,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1429,
+                            "referencedDeclaration": 1621,
                             "src": "357:4:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_GuessTheRandomNumberChallenge_$328",
@@ -687,7 +687,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1408,
+                            "referencedDeclaration": 1600,
                             "src": "449:3:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -746,7 +746,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1411,
+                      "referencedDeclaration": 1603,
                       "src": "441:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -864,7 +864,7 @@
                                 "name": "msg",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1408,
+                                "referencedDeclaration": 1600,
                                 "src": "515:3:3",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_message",
@@ -1118,7 +1118,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1411,
+                              "referencedDeclaration": 1603,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1159,7 +1159,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1408,
+                                      "referencedDeclaration": 1600,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -1295,7 +1295,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1402,
+                                      "referencedDeclaration": 1594,
                                       "type": "function () pure returns (bytes32)",
                                       "value": "keccak256"
                                     },
@@ -1341,7 +1341,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 1399,
+                                              "referencedDeclaration": 1591,
                                               "type": "block",
                                               "value": "block"
                                             },
@@ -1387,7 +1387,7 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 1399,
+                                                  "referencedDeclaration": 1591,
                                                   "type": "block",
                                                   "value": "block"
                                                 },
@@ -1433,7 +1433,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1410,
+                                      "referencedDeclaration": 1602,
                                       "type": "uint256",
                                       "value": "now"
                                     },
@@ -1606,7 +1606,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1429,
+                                      "referencedDeclaration": 1621,
                                       "type": "contract GuessTheRandomNumberChallenge",
                                       "value": "this"
                                     },
@@ -1752,7 +1752,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1411,
+                              "referencedDeclaration": 1603,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1793,7 +1793,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1408,
+                                      "referencedDeclaration": 1600,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -1945,7 +1945,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 1408,
+                                              "referencedDeclaration": 1600,
                                               "type": "msg",
                                               "value": "msg"
                                             },
@@ -2033,7 +2033,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-07T14:18:07.813Z",
+  "updatedAt": "2021-11-09T15:02:22.585Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

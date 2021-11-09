@@ -17,19 +17,19 @@ module.exports = async function (deployer, network, accounts) {
   // await tokenSaleHelper.setOtherContract(NetworkContracts.networks[network].tokenSaleChallengeContract);
   // NetworkContracts.networks[network].tokenSaleHelperContract = tokenSaleHelper.address;
 
-  // if (network === 'development') {
-  //   await deployer.deploy(TokenWhaleChallenge, accounts[0], { from: accounts[0] });
-  //   const tokenWhaleChallenge = await TokenWhaleChallenge.deployed();
-  //   NetworkContracts.networks[network].TokenWhaleChallengeContract = tokenWhaleChallenge.address;
-  // }
-  // await deployer.deploy(TokenWhaleHelper, { from: accounts[0] });
-  // var tokenWhaleHelper = await TokenWhaleHelper.deployed();
-  // await tokenWhaleHelper.setOtherContract(NetworkContracts.networks[network].TokenWhaleChallengeContract);
-  // NetworkContracts.networks[network].TokenWhaleHelperContract = tokenWhaleHelper.address;
+  if (network === 'development') {
+    await deployer.deploy(TokenWhaleChallenge, accounts[0], { from: accounts[0] });
+    const tokenWhaleChallenge = await TokenWhaleChallenge.deployed();
+    NetworkContracts.networks[network].TokenWhaleChallengeContract = tokenWhaleChallenge.address;
+  }
+  await deployer.deploy(TokenWhaleHelper, { from: accounts[0] });
+  var tokenWhaleHelper = await TokenWhaleHelper.deployed();
+  await tokenWhaleHelper.setOtherContract(NetworkContracts.networks[network].TokenWhaleChallengeContract);
+  NetworkContracts.networks[network].TokenWhaleHelperContract = tokenWhaleHelper.address;
 
-  // // write changes to the config file
-  // var newNetworkContracts = 'module.exports = ' + JSON.stringify(NetworkContracts, null, 4) + ';';
-  // fs.writeFileSync('src/networkContracts.js', newNetworkContracts);
+  // write changes to the config file
+  var newNetworkContracts = 'module.exports = ' + JSON.stringify(NetworkContracts, null, 4) + ';';
+  fs.writeFileSync('src/networkContracts.js', newNetworkContracts);
 };
 
 /*

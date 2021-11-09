@@ -5,15 +5,16 @@ import { getNetworkContract } from '../utilities/networkUtilities';
 
 const predictHashHelperAbi = require('../abi/PredictHashHelper.json').abi;
 const predictTheBlockHashAbi = require('../abi/PredictTheBlockHashChallenge.json').abi;
+const waitBlocks = 260;
 
 export default function PredictTheBlock(props) {
     const [predictTheBlockHashInstance, setPredictTheBlockHashInstance] = React.useState();
     const [predictHashHelperInstance, setPredictHashHelperInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
-    const [blockNumberHashRunning, setBlockNumberHashRunning] = React.useState(false);
-    const [blockNumberCurrent, setBlockNumberCurrent] = React.useState();
-    const [blockNumberTarget, setBlockNumberTarget] = React.useState();
-    const [predictTheBlockBalance, setPredictTheBlockBalance] = React.useState(0);
+    const [balance, setBalance] = React.useState(0);
+    const [helperBalance, setHelperBalance] = React.useState(0);
+    const [currentBlock, setCurrentBlock] = React.useState(0);
+    const [settlementBlock, setSettlementBlock] = React.useState(0);
 
     if (props.web3 && props.accounts && props.networkType) {
         if (!predictTheBlockHashInstance)
@@ -22,80 +23,90 @@ export default function PredictTheBlock(props) {
             loadInstance(predictHashHelperAbi, getNetworkContract(props.networkType, "predictHashHelperContract"), setPredictHashHelperInstance, props.accounts, props.web3);
     }
 
-    const OnClickPredictTheBlockHash = async (event) => {
+    const OnClickLockIn = async (event) => {
         event.preventDefault();
         if (!isComplete) {
             const oneEth = props.web3.utils.toWei('1', 'ether');
-            var blockNumber = await props.web3.eth.getBlockNumber() + 264;
-            setBlockNumberTarget(blockNumber);
             var answer = '0x0000000000000000000000000000000000000000000000000000000000000000';
             await predictHashHelperInstance.methods.lockInGuess(answer).send({ from: props.accounts[0], value: oneEth });
-            setBlockNumberCurrent(await props.web3.eth.getBlockNumber());
-            setBlockNumberHashRunning(true);
+            const currBlock = await props.web3.eth.getBlockNumber();
+            setCurrentBlock(currBlock);
         }
         else
             alert(`already completed`);
     }
 
-    const checkCompleted = React.useCallback(() => {
-        if (props.web3 && props.accounts && predictTheBlockHashInstance) {
-            console.log(`predictTheBlock.checkCompleted`);
-            predictTheBlockHashInstance.methods.isComplete().call().then(completed => setIsComplete(completed), 
-                err => alert(`predictTheBlock.isComplete: ${err}`));
-        }
-    }, [props.web3, props.accounts, predictTheBlockHashInstance, setIsComplete]
-    );
-
-    const getBlockHashBalance = React.useCallback(async () => {
-        if (props.web3 && predictTheBlockHashInstance) {
-            console.log(`predictTheBlock.getBlockHashBalance`);
-            props.web3.eth.getBalance(predictTheBlockHashInstance._address).then(balance => {
-                var wei = props.web3.utils.fromWei(balance);
-                setPredictTheBlockBalance(wei);
-            }, 
-            err => alert(`predictTheBlock.getBalance: ${err}`));
-            checkCompleted();
-        }
-    }, [props.web3, predictTheBlockHashInstance, checkCompleted]
-    );
-
-    const runBlockHash = React.useCallback(async () => {
-        if (blockNumberHashRunning) {
-            if (blockNumberCurrent > blockNumberTarget) {
-                setBlockNumberHashRunning(false);
-                await predictHashHelperInstance.methods.settle().send({ from: props.accounts[0] });
-                var completed = await predictTheBlockHashInstance.methods.isComplete().call({ from: props.accounts[0] });
-                alert(completed ? `PredictTheBlockHash Failed` : `PredictTheBlockHash Success`);
-                await predictHashHelperInstance.methods.withdraw().call({ from: props.accounts[0] });
-                getBlockHashBalance();
-            }
-            else
-                setBlockNumberCurrent(await props.web3.eth.getBlockNumber());
-        }
-    }, [blockNumberCurrent, blockNumberTarget, predictTheBlockHashInstance, setBlockNumberHashRunning, props.accounts,
-        props.web3, setBlockNumberCurrent, predictHashHelperInstance, blockNumberHashRunning, getBlockHashBalance]
-    );
-
     React.useEffect(() => {
         const interval = setInterval(() => {
-            if (blockNumberHashRunning)
-                runBlockHash();
-        }, 500);
+            if (balance === '2') {
+                props.web3.eth.getBlockNumber().then(currBlock => {
+                    predictHashHelperInstance.methods.getSettlementBlockNumber().call().then(settleBlock => {
+                        if (currBlock < settleBlock + waitBlocks)
+                            setCurrentBlock(currBlock);
+                        if (settlementBlock !== settleBlock)
+                            setSettlementBlock(settleBlock);
+                    });
+                });
+            }
+        }, 15000);
         return () => clearInterval(interval);
-    }, [blockNumberHashRunning, runBlockHash]);
+    }, [balance, props, setCurrentBlock, settlementBlock, setSettlementBlock, predictHashHelperInstance]);
 
-    const getBlockWaitingCount = () => {
-        if (blockNumberHashRunning) {
-            const targetReached = blockNumberCurrent >= blockNumberTarget;
-            return targetReached ? "running settle" : blockNumberTarget - blockNumberCurrent;
-        }
-        return "-";
+    const onClickSettle = async () => {
+        await predictHashHelperInstance.methods.settle().send({ from: props.accounts[0] });
+        var completed = await predictTheBlockHashInstance.methods.isComplete().call({ from: props.accounts[0] });
+        setIsComplete(completed);
+        await predictHashHelperInstance.methods.withdraw().call({ from: props.accounts[0] });
+        setCurrentBlock(0);
+        setSettlementBlock(0);
     }
 
     const getButton = () => {
         return (
-            <button disabled={!predictHashHelperInstance} onClick={OnClickPredictTheBlockHash}>Predict the block</button>
+            <>
+                <button disabled={!predictHashHelperInstance} onClick={OnClickLockIn}>Lock-In</button>
+                <button disabled={!predictHashHelperInstance} onClick={onClickSettle}>Settle</button>
+            </>
         );
+    }
+
+    const checkCompleted = () => {
+        if (props.web3 && props.accounts && predictTheBlockHashInstance && predictHashHelperInstance) {
+            console.log(`predictTheBlock.checkCompleted`);
+            predictTheBlockHashInstance.methods.isComplete().call().then(completed => setIsComplete(completed),
+                err => alert(`predictTheBlock.isComplete: ${err}`));
+            if (props.web3 && predictTheBlockHashInstance) {
+                console.log(`predictTheBlock.getBalance`);
+                props.web3.eth.getBalance(predictTheBlockHashInstance._address).then(balance => {
+                    var wei = props.web3.utils.fromWei(balance);
+                    setBalance(wei);
+                },
+                    err => alert(`predictTheBlock.getBalance: ${err}`));
+                predictHashHelperInstance.methods.getSettlementBlockNumber().call().then(block => setSettlementBlock(block),
+                    err => alert(`predictTheBlock.getSettlementBlockNumber: ${err}`));
+                if (props.networkType !== 'ropsten') {
+                    props.web3.eth.getBlockNumber().then(currBlock => {
+                        setCurrentBlock(currBlock);
+                    });
+                }
+                props.web3.eth.getBalance(predictHashHelperInstance._address).then(balance => {
+                    var wei = props.web3.utils.fromWei(balance);
+                    setHelperBalance(wei);
+                },
+                    err => alert(`predictTheBlock.getBalance: ${err}`));
+            }
+        }
+    }
+
+    const blocksWaiting = () => {
+        const settleBlk = parseInt(settlementBlock);
+        // console.log(`waitBlocks: ${waitBlocks} currentBlock: ${currentBlock} settleBlk: ${settleBlk} waitBlocks+settleBlk-currentBlock: ${waitBlocks+settleBlk-currentBlock}`);
+        // console.log(`Types---   waitBlocks: ${typeof(waitBlocks)} currentBlock: ${typeof(currentBlock)} settlementBlock: ${typeof(settlementBlock)}`);
+        if (currentBlock !== 0 && settleBlk !== 0 && currentBlock < settleBlk + waitBlocks)
+            return `wait: ${waitBlocks+settleBlk-currentBlock}`;
+        if (balance === '2')
+            return "ready"
+        return "";
     }
 
     const getCompleted = () => {
@@ -103,11 +114,10 @@ export default function PredictTheBlock(props) {
             return "loading";
         }
         checkCompleted();
-        getBlockHashBalance();
         return isComplete ? "true" : "false";
     }
 
     return (
-        <CaptureRow name="Predict the block" blocks={getBlockWaitingCount()} action={getButton()} balance={predictTheBlockBalance} completed={getCompleted()} />
+        <CaptureRow name="Predict the block" blocks={blocksWaiting()} action={getButton()} balance={balance+'/'+helperBalance} completed={getCompleted()} />
     );
 }
