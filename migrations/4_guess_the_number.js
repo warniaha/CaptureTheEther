@@ -8,25 +8,25 @@ const GuessTheNewNumberChallenge = artifacts.require("GuessTheNewNumberChallenge
 const CheatTheNewNumber = artifacts.require("CheatTheNewNumber");
 
 module.exports = async function (deployer, network, accounts) {
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(GuessTheNumberChallenge, { from: accounts[0], value: "1000000000000000000" });
   //   var guessTheNumberChallenge = await GuessTheNumberChallenge.deployed();
   //   NetworkContracts.networks[network].guessTheNumberChallengeContract = guessTheNumberChallenge.address;
   // }
   
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(GuessTheSecretNumberChallenge, { from: accounts[0], value: "1000000000000000000" });
   //   var guessTheSecretNumberChallenge = await GuessTheSecretNumberChallenge.deployed();
   //   NetworkContracts.networks[network].guessTheSecretNumberChallengeContract = guessTheSecretNumberChallenge.address;
   // }
 
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(GuessTheNewNumberChallenge, { from: accounts[0], value: "1000000000000000000" });
   //   var guessTheNewNumberChallenge = await GuessTheNewNumberChallenge.deployed();
   //   NetworkContracts.networks[network].guessTheNewNumberChallengeContract = guessTheNewNumberChallenge.address;
   // }
 
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(GuessTheRandomNumberChallenge, { from: accounts[0], value: "1000000000000000000" });
   //   var guessTheRandomNumberChallenge = await GuessTheRandomNumberChallenge.deployed();
   //   NetworkContracts.networks[network].guessTheRandomNumberChallengeContract = guessTheRandomNumberChallenge.address;

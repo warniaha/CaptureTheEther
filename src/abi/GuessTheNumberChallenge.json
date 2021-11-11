@@ -148,7 +148,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1600,
+                            "referencedDeclaration": 1874,
                             "src": "162:3:2",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -207,7 +207,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1603,
+                      "referencedDeclaration": 1877,
                       "src": "154:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -290,7 +290,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1619,
+                            "referencedDeclaration": 1893,
                             "src": "274:4:2",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_GuessTheNumberChallenge_$258",
@@ -462,7 +462,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1600,
+                            "referencedDeclaration": 1874,
                             "src": "366:3:2",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -521,7 +521,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1603,
+                      "referencedDeclaration": 1877,
                       "src": "358:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -639,7 +639,7 @@
                                 "name": "msg",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1600,
+                                "referencedDeclaration": 1874,
                                 "src": "432:3:2",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_message",
@@ -909,7 +909,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1603,
+                              "referencedDeclaration": 1877,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -950,7 +950,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1600,
+                                      "referencedDeclaration": 1874,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -1140,7 +1140,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1619,
+                                      "referencedDeclaration": 1893,
                                       "type": "contract GuessTheNumberChallenge",
                                       "value": "this"
                                     },
@@ -1286,7 +1286,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1603,
+                              "referencedDeclaration": 1877,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1327,7 +1327,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1600,
+                                      "referencedDeclaration": 1874,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -1479,7 +1479,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 1600,
+                                              "referencedDeclaration": 1874,
                                               "type": "msg",
                                               "value": "msg"
                                             },
@@ -1567,7 +1567,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-09T15:02:22.581Z",
+  "updatedAt": "2021-11-11T14:32:04.245Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

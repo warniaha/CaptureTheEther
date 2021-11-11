@@ -115,8 +115,8 @@
   "metadata": "{\"compiler\":{\"version\":\"0.4.21+commit.dfe3193c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"getOtherContract\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"newAddr\",\"type\":\"address\"}],\"name\":\"setOtherContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"guess\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"isComplete\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"balance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"otherContract\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"caller\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"newAddress\",\"type\":\"address\"}],\"name\":\"SetOtherContract\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/GuessTheNewNumberChallenge.sol\":\"CheatTheNewNumber\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/GuessTheNewNumberChallenge.sol\":{\"keccak256\":\"0x610d72251b01207c6020107457651caa80c5957953402a2c60dfe7981d7d2df3\",\"urls\":[\"bzzr://c97d43e596a78e4f4f7f9b23c4fa5a2e91f4142c343f95ec300c253ef400c1b4\"]},\"project:/contracts/OtherContract.sol\":{\"keccak256\":\"0x2282b7a012b52a6b0e40a28a1c6a7bd1dc0fa6c4c35d5a48baf9490a448ce98d\",\"urls\":[\"bzzr://11f8b08ae890acd24f6c66410d8ba5479b58dceb72171430729d960d09f20718\"]}},\"version\":1}",
   "bytecode": "0x606060405260008060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550341561005057600080fd5b6106778061005f6000396000f300606060405260043610610083576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630b4b51981461008557806335a28f3e146100da5780633ccfd60b14610113578063a28b749a14610128578063b2fa1c9e14610132578063b69ef8a81461015f578063e98d36e114610188575b005b341561009057600080fd5b6100986101dd565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156100e557600080fd5b610111600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610206565b005b341561011e57600080fd5b6101266102e0565b005b610130610339565b005b341561013d57600080fd5b6101456104a7565b604051808215151515815260200191505060405180910390f35b341561016a57600080fd5b61017261059a565b6040518082815260200191505060405180910390f35b341561019357600080fd5b61019b610626565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055507f081eb3239ea805b9a08e7c4f93baacc9d1965ecde599e5ed9b2b3936cd3fe0b83382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019250505060405180910390a150565b3373ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050151561033757600080fd5b565b60008060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415151561038357600080fd5b6001430340426040518083600019166000191681526020018281526020019250505060405180910390206001900491506000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690508073ffffffffffffffffffffffffffffffffffffffff16634ba4c16b34846040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808260ff1660ff1681526020019150506000604051808303818588803b151561044b57600080fd5b5af1151561045857600080fd5b5050505060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16311415156104a357600080fd5b5050565b6000806000806000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16141515156104f257600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1691508173ffffffffffffffffffffffffffffffffffffffff1663b2fa1c9e6040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b151561057957600080fd5b5af1151561058657600080fd5b505050604051805190509050809250505090565b60008060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16141515156105e457600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163190508091505090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820241f998c7fc1eb40b2d9081cdeba13ff3e91452f22ed4f5e7e481e268acca2e00029",
   "deployedBytecode": "0x606060405260043610610083576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630b4b51981461008557806335a28f3e146100da5780633ccfd60b14610113578063a28b749a14610128578063b2fa1c9e14610132578063b69ef8a81461015f578063e98d36e114610188575b005b341561009057600080fd5b6100986101dd565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156100e557600080fd5b610111600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610206565b005b341561011e57600080fd5b6101266102e0565b005b610130610339565b005b341561013d57600080fd5b6101456104a7565b604051808215151515815260200191505060405180910390f35b341561016a57600080fd5b61017261059a565b6040518082815260200191505060405180910390f35b341561019357600080fd5b61019b610626565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055507f081eb3239ea805b9a08e7c4f93baacc9d1965ecde599e5ed9b2b3936cd3fe0b83382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019250505060405180910390a150565b3373ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050151561033757600080fd5b565b60008060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415151561038357600080fd5b6001430340426040518083600019166000191681526020018281526020019250505060405180910390206001900491506000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690508073ffffffffffffffffffffffffffffffffffffffff16634ba4c16b34846040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808260ff1660ff1681526020019150506000604051808303818588803b151561044b57600080fd5b5af1151561045857600080fd5b5050505060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16311415156104a357600080fd5b5050565b6000806000806000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16141515156104f257600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1691508173ffffffffffffffffffffffffffffffffffffffff1663b2fa1c9e6040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b151561057957600080fd5b5af1151561058657600080fd5b505050604051805190509050809250505090565b60008060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16141515156105e457600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163190508091505090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820241f998c7fc1eb40b2d9081cdeba13ff3e91452f22ed4f5e7e481e268acca2e00029",
-  "sourceMap": "550:1152:1:-;;;88:1:7;57:32;;;;;;;;;;;;;;;;;;;;550:1152:1;;;;;;;;;;;;;;",
-  "deployedSourceMap": "550:1152:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;365:97:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;202:155;;;;;;;;;;;;;;;;;;;;;;;;;;;;1610:89:1;;;;;;;;;;;;;;908:449;;;;;;603:297;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1365:195;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;57:32:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;365:97;414:7;441:13;;;;;;;;;;;434:20;;365:97;:::o;202:155::-;279:7;263:13;;:23;;;;;;;;;;;;;;;;;;312:37;329:10;341:7;312:37;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;202:155;:::o;1610:89:1:-;1649:10;:19;;:42;1677:4;1669:21;;;1649:42;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1610:89::o;908:449::-;989:12;1073:53;976:1;959:13;;;;;;;;;;;:18;;;;951:27;;;;;;;;1051:1;1036:12;:16;1020:33;1055:3;1010:49;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1004:56;;;989:71;;1156:13;;;;;;;;;;;1073:97;;1181:26;:32;;;1220:9;1231:6;1181:57;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1347:1;1321:13;;;;;;;;;;;1313:30;;;:35;1305:44;;;;;;;;908:449;;:::o;603:297::-;646:4;701:53;809:14;688:1;671:13;;;;;;;;;;;:18;;;;663:27;;;;;;;;784:13;;;;;;;;;;;701:97;;826:26;:37;;;:39;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;809:56;;883:9;876:16;;603:297;;;:::o;1365:195::-;1405:7;1463:23;1450:1;1433:13;;;;;;;;;;;:18;;;;1425:27;;;;;;;;1497:13;;;;;;;;;;;1489:30;;;1463:56;;1537:15;1530:22;;1365:195;;:::o;57:32:7:-;;;;;;;;;;;;;:::o",
+  "sourceMap": "550:1152:1:-;;;88:1:8;57:32;;;;;;;;;;;;;;;;;;;;550:1152:1;;;;;;;;;;;;;;",
+  "deployedSourceMap": "550:1152:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;365:97:8;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;202:155;;;;;;;;;;;;;;;;;;;;;;;;;;;;1610:89:1;;;;;;;;;;;;;;908:449;;;;;;603:297;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1365:195;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;57:32:8;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;365:97;414:7;441:13;;;;;;;;;;;434:20;;365:97;:::o;202:155::-;279:7;263:13;;:23;;;;;;;;;;;;;;;;;;312:37;329:10;341:7;312:37;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;202:155;:::o;1610:89:1:-;1649:10;:19;;:42;1677:4;1669:21;;;1649:42;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1610:89::o;908:449::-;989:12;1073:53;976:1;959:13;;;;;;;;;;;:18;;;;951:27;;;;;;;;1051:1;1036:12;:16;1020:33;1055:3;1010:49;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1004:56;;;989:71;;1156:13;;;;;;;;;;;1073:97;;1181:26;:32;;;1220:9;1231:6;1181:57;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1347:1;1321:13;;;;;;;;;;;1313:30;;;:35;1305:44;;;;;;;;908:449;;:::o;603:297::-;646:4;701:53;809:14;688:1;671:13;;;;;;;;;;;:18;;;;663:27;;;;;;;;784:13;;;;;;;;;;;701:97;;826:26;:37;;;:39;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;809:56;;883:9;876:16;;603:297;;;:::o;1365:195::-;1405:7;1463:23;1450:1;1433:13;;;;;;;;;;;:18;;;;1425:27;;;;;;;;1497:13;;;;;;;;;;;1489:30;;;1463:56;;1537:15;1530:22;;1365:195;;:::o;57:32:8:-;;;;;;;;;;;;;:::o",
   "source": "pragma solidity 0.4.21;\r\n\r\nimport './OtherContract.sol';\r\n\r\n/*\r\nconst oneEth = web3.utils.toWei('1', 'ether');\r\nvar cheatTheNewNumber = await CheatTheNewNumber.deployed();\r\nvar balance = await cheatTheNewNumber.balance();\r\nweb3.utils.fromWei(balance);\r\nawait cheatTheNewNumber.guess({from: accounts[0], value: oneEth});\r\nawait cheatTheNewNumber.isComplete();\r\n\r\n// ropsten balance\r\nweb3.eth.getBalance('0xd20FF949eb2A487823828B9E14Ab39cF8C31eb11')\r\n\r\n\r\n// development balance\r\nweb3.eth.getBalance('0x3C5a99d8f3b559618e56D993E73f10e4406699d5')\r\n*/\r\n\r\ncontract CheatTheNewNumber is OtherContract {\r\n\r\n    function isComplete() public view returns (bool) {\r\n        require(otherContract != 0);\r\n        GuessTheNewNumberChallenge guessTheNewNumberChallenge = GuessTheNewNumberChallenge(otherContract);\r\n        bool completed = guessTheNewNumberChallenge.isComplete();\r\n        return completed;\r\n    }\r\n\r\n    function guess() public payable {\r\n        require(otherContract != 0);\r\n        uint8 answer = uint8(keccak256(block.blockhash(block.number - 1), now));\r\n\r\n        GuessTheNewNumberChallenge guessTheNewNumberChallenge = GuessTheNewNumberChallenge(otherContract);\r\n        guessTheNewNumberChallenge.guess.value(msg.value)(answer);\r\n\r\n        // only allow success if the guess was right\r\n        require(address(otherContract).balance == 0);\r\n    }\r\n\r\n    function balance() public view returns (uint256) {\r\n        require(otherContract != 0);\r\n        uint256 contractBalance = address(otherContract).balance;\r\n        return contractBalance;\r\n    }\r\n\r\n    function() public payable {\r\n    }\r\n\r\n    function withdraw() public { \r\n        msg.sender.transfer(address(this).balance);\r\n    }\r\n}\r\n\r\ncontract GuessTheNewNumberChallenge {\r\n    function GuessTheNewNumberChallenge() public payable {\r\n        require(msg.value == 1 ether);\r\n    }\r\n\r\n    function isComplete() public view returns (bool) {\r\n        return address(this).balance == 0;\r\n    }\r\n\r\n    function guess(uint8 n) public payable {\r\n        require(msg.value == 1 ether);\r\n        uint8 answer = uint8(keccak256(block.blockhash(block.number - 1), now));\r\n\r\n        if (n == answer) {\r\n            msg.sender.transfer(2 ether);\r\n        }\r\n    }\r\n}\r\n",
   "sourcePath": "C:\\defi\\capturetheether\\contracts\\GuessTheNewNumberChallenge.sol",
   "ast": {
@@ -148,7 +148,7 @@
         "id": 16,
         "nodeType": "ImportDirective",
         "scope": 203,
-        "sourceUnit": 509,
+        "sourceUnit": 557,
         "src": "27:29:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -162,10 +162,10 @@
               "id": 17,
               "name": "OtherContract",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 508,
+              "referencedDeclaration": 556,
               "src": "580:13:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_OtherContract_$508",
+                "typeIdentifier": "t_contract$_OtherContract_$556",
                 "typeString": "contract OtherContract"
               }
             },
@@ -175,7 +175,7 @@
           }
         ],
         "contractDependencies": [
-          508
+          556
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -183,7 +183,7 @@
         "id": 136,
         "linearizedBaseContracts": [
           136,
-          508
+          556
         ],
         "name": "CheatTheNewNumber",
         "nodeType": "ContractDefinition",
@@ -215,7 +215,7 @@
                           "name": "otherContract",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 477,
+                          "referencedDeclaration": 525,
                           "src": "671:13:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -260,7 +260,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1603,
+                      "referencedDeclaration": 1877,
                       "src": "663:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -329,7 +329,7 @@
                         "name": "otherContract",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 477,
+                        "referencedDeclaration": 525,
                         "src": "784:13:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -556,7 +556,7 @@
                           "name": "otherContract",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 477,
+                          "referencedDeclaration": 525,
                           "src": "959:13:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -601,7 +601,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1603,
+                      "referencedDeclaration": 1877,
                       "src": "951:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -687,7 +687,7 @@
                                     "name": "block",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 1591,
+                                    "referencedDeclaration": 1865,
                                     "src": "1036:5:1",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_magic_block",
@@ -748,7 +748,7 @@
                                 "name": "block",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1591,
+                                "referencedDeclaration": 1865,
                                 "src": "1020:5:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_block",
@@ -789,7 +789,7 @@
                             "name": "now",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1602,
+                            "referencedDeclaration": 1876,
                             "src": "1055:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -812,7 +812,7 @@
                           "name": "keccak256",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1594,
+                          "referencedDeclaration": 1868,
                           "src": "1010:9:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
@@ -915,7 +915,7 @@
                         "name": "otherContract",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 477,
+                        "referencedDeclaration": 525,
                         "src": "1156:13:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -992,7 +992,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1600,
+                            "referencedDeclaration": 1874,
                             "src": "1220:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1122,7 +1122,7 @@
                                 "name": "otherContract",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 477,
+                                "referencedDeclaration": 525,
                                 "src": "1321:13:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_address",
@@ -1216,7 +1216,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1603,
+                      "referencedDeclaration": 1877,
                       "src": "1305:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1297,7 +1297,7 @@
                           "name": "otherContract",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 477,
+                          "referencedDeclaration": 525,
                           "src": "1433:13:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -1342,7 +1342,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1603,
+                      "referencedDeclaration": 1877,
                       "src": "1425:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1411,7 +1411,7 @@
                           "name": "otherContract",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 477,
+                          "referencedDeclaration": 525,
                           "src": "1497:13:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -1600,7 +1600,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1615,
+                              "referencedDeclaration": 1889,
                               "src": "1677:4:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_CheatTheNewNumber_$136",
@@ -1672,7 +1672,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1600,
+                          "referencedDeclaration": 1874,
                           "src": "1649:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1800,7 +1800,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1600,
+                            "referencedDeclaration": 1874,
                             "src": "1821:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1859,7 +1859,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1603,
+                      "referencedDeclaration": 1877,
                       "src": "1813:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1942,7 +1942,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1617,
+                            "referencedDeclaration": 1891,
                             "src": "1933:4:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_GuessTheNewNumberChallenge_$202",
@@ -2114,7 +2114,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1600,
+                            "referencedDeclaration": 1874,
                             "src": "2025:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2173,7 +2173,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1603,
+                      "referencedDeclaration": 1877,
                       "src": "2017:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2259,7 +2259,7 @@
                                     "name": "block",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 1591,
+                                    "referencedDeclaration": 1865,
                                     "src": "2104:5:1",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_magic_block",
@@ -2320,7 +2320,7 @@
                                 "name": "block",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1591,
+                                "referencedDeclaration": 1865,
                                 "src": "2088:5:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_block",
@@ -2361,7 +2361,7 @@
                             "name": "now",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1602,
+                            "referencedDeclaration": 1876,
                             "src": "2123:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -2384,7 +2384,7 @@
                           "name": "keccak256",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1594,
+                          "referencedDeclaration": 1868,
                           "src": "2078:9:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
@@ -2536,7 +2536,7 @@
                                 "name": "msg",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1600,
+                                "referencedDeclaration": 1874,
                                 "src": "2173:3:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_magic_message",
@@ -2682,7 +2682,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 509,
+          "SourceUnit": 557,
           "absolutePath": "project:/contracts/OtherContract.sol",
           "file": "./OtherContract.sol",
           "scope": 203,
@@ -2698,14 +2698,14 @@
       {
         "attributes": {
           "contractDependencies": [
-            508
+            556
           ],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
             136,
-            508
+            556
           ],
           "name": "CheatTheNewNumber",
           "scope": 203
@@ -2722,7 +2722,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "OtherContract",
-                  "referencedDeclaration": 508,
+                  "referencedDeclaration": 556,
                   "type": "contract OtherContract"
                 },
                 "id": 17,
@@ -2825,7 +2825,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1603,
+                              "referencedDeclaration": 1877,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2854,7 +2854,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 477,
+                                  "referencedDeclaration": 525,
                                   "type": "address",
                                   "value": "otherContract"
                                 },
@@ -2969,7 +2969,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 477,
+                              "referencedDeclaration": 525,
                               "type": "address",
                               "value": "otherContract"
                             },
@@ -3184,7 +3184,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1603,
+                              "referencedDeclaration": 1877,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -3213,7 +3213,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 477,
+                                  "referencedDeclaration": 525,
                                   "type": "address",
                                   "value": "otherContract"
                                 },
@@ -3350,7 +3350,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 1594,
+                                  "referencedDeclaration": 1868,
                                   "type": "function () pure returns (bytes32)",
                                   "value": "keccak256"
                                 },
@@ -3396,7 +3396,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 1591,
+                                          "referencedDeclaration": 1865,
                                           "type": "block",
                                           "value": "block"
                                         },
@@ -3442,7 +3442,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 1591,
+                                              "referencedDeclaration": 1865,
                                               "type": "block",
                                               "value": "block"
                                             },
@@ -3488,7 +3488,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 1602,
+                                  "referencedDeclaration": 1876,
                                   "type": "uint256",
                                   "value": "now"
                                 },
@@ -3586,7 +3586,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 477,
+                              "referencedDeclaration": 525,
                               "type": "address",
                               "value": "otherContract"
                             },
@@ -3712,7 +3712,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1600,
+                                      "referencedDeclaration": 1874,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -3782,7 +3782,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1603,
+                              "referencedDeclaration": 1877,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -3857,7 +3857,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 477,
+                                          "referencedDeclaration": 525,
                                           "type": "address",
                                           "value": "otherContract"
                                         },
@@ -4008,7 +4008,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1603,
+                              "referencedDeclaration": 1877,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -4037,7 +4037,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 477,
+                                  "referencedDeclaration": 525,
                                   "type": "address",
                                   "value": "otherContract"
                                 },
@@ -4162,7 +4162,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 477,
+                                  "referencedDeclaration": 525,
                                   "type": "address",
                                   "value": "otherContract"
                                 },
@@ -4367,7 +4367,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1600,
+                                      "referencedDeclaration": 1874,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -4437,7 +4437,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1615,
+                                      "referencedDeclaration": 1889,
                                       "type": "contract CheatTheNewNumber",
                                       "value": "this"
                                     },
@@ -4567,7 +4567,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1603,
+                              "referencedDeclaration": 1877,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -4608,7 +4608,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1600,
+                                      "referencedDeclaration": 1874,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -4798,7 +4798,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1617,
+                                      "referencedDeclaration": 1891,
                                       "type": "contract GuessTheNewNumberChallenge",
                                       "value": "this"
                                     },
@@ -4944,7 +4944,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1603,
+                              "referencedDeclaration": 1877,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -4985,7 +4985,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1600,
+                                      "referencedDeclaration": 1874,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -5127,7 +5127,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 1594,
+                                  "referencedDeclaration": 1868,
                                   "type": "function () pure returns (bytes32)",
                                   "value": "keccak256"
                                 },
@@ -5173,7 +5173,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 1591,
+                                          "referencedDeclaration": 1865,
                                           "type": "block",
                                           "value": "block"
                                         },
@@ -5219,7 +5219,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 1591,
+                                              "referencedDeclaration": 1865,
                                               "type": "block",
                                               "value": "block"
                                             },
@@ -5265,7 +5265,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 1602,
+                                  "referencedDeclaration": 1876,
                                   "type": "uint256",
                                   "value": "now"
                                 },
@@ -5395,7 +5395,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 1600,
+                                              "referencedDeclaration": 1874,
                                               "type": "msg",
                                               "value": "msg"
                                             },
@@ -5476,10 +5476,28 @@
   },
   "networks": {
     "3": {
-      "events": {},
+      "events": {
+        "0x081eb3239ea805b9a08e7c4f93baacc9d1965ecde599e5ed9b2b3936cd3fe0b8": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "caller",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "newAddress",
+              "type": "address"
+            }
+          ],
+          "name": "SetOtherContract",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0x822d23bB6f6839FFb44B1dfF461e8D78dEBb665b",
-      "transactionHash": "0xae38cb0eabb93b34ece18a19148160dfe0977dff1464d4cbee6feb792361a3da"
+      "address": "0x48A082a0f95db7848B7d2897D5d8355D781B8909",
+      "transactionHash": "0xc7cb8c61e5cc2acbe45bca5eef5e7255e476e80b92205476f8c804e13e383a3f"
     },
     "5777": {
       "events": {
@@ -5507,7 +5525,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-09T15:02:22.594Z",
+  "updatedAt": "2021-11-11T14:32:04.256Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

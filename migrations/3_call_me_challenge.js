@@ -4,7 +4,7 @@ var NetworkContracts = require('../src/networkContracts');
 const CallMeChallenge = artifacts.require("CallMeChallenge");
 
 module.exports = async function (deployer, network, accounts) {
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(CallMeChallenge);
   //   var callMeChallenge = await CallMeChallenge.deployed();
   //   NetworkContracts.networks[network].callMeChallengeContract = callMeChallenge.address;

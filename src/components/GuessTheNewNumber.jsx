@@ -39,8 +39,19 @@ export default function GuessTheNewNumber (props) {
             alert(`already completed`);
     }
 
+    const OnClickWithdraw = async () => {
+        debugger;
+        await cheatTheNewNumberInstance.methods.withdraw().call();
+        checkCompleted();
+    }
+
     const getButton = () => {
-        return (<button disabled={!cheatTheNewNumberInstance} onClick={OnClickFindTheNewNumber}>Guess the new number</button>);
+        return (
+            <>
+                <button disabled={!cheatTheNewNumberInstance} onClick={OnClickFindTheNewNumber}>Guess</button>
+                <button disabled={cheatBalance === 0} onClick={OnClickWithdraw}>Withdraw</button>
+            </>
+        );
     }
 
     const checkCompleted = () => {

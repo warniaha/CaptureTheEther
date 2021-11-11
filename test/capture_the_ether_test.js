@@ -183,4 +183,20 @@ contract("CaptureTheEtherTest", function (accounts) {
     );
     assert(balance === '0', "balance should be zero");
   });
+
+  it("should run until the cows come home", async () => {
+    var predictHelper = await PredictHelper.deployed();
+    while (true) {
+      try {
+        await predictHelper.settle()
+        return;
+      }
+      catch {
+        var counter = 0;
+        var blockNum = await web3.eth.getBlockNumber();
+        while ((await web3.eth.getBlockNumber()) === blockNum)
+          console.log(`${++counter}`)
+      }
+    }
+  });
 });

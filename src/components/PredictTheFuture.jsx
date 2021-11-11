@@ -6,14 +6,17 @@ import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
 
 const predictHelperAbi = require('../abi/PredictHelper.json').abi;
 const predictTheFutureChallengeAbi = require('../abi/PredictTheFutureChallenge.json').abi;
+const theAnswer = "0x0000000000000000000000000000000000000000000000000000000000000000";
 
 export default function PredictTheFuture(props) {
     const [predictTheFutureChallengeInstance, setPredictTheFutureChallengeInstance] = React.useState();
     const [predictHelperInstance, setPredictHelperInstance] = React.useState();
     const [isComplete, setIsComplete] = React.useState(undefined);
-    const [lockInBlockNumber, setLockInBlockNumber] = React.useState(false);
     const [balance, setBalance] = React.useState(0);
     const [contractBalance, setContractBalance] = React.useState(0);
+    const [calculatedAnswer, setCalculatedAnswer] = React.useState("");
+    const [sanity, setSanity] = React.useState();
+    const [settling, setSettling] = React.useState(false);
 
     if (props.web3 && props.accounts && props.networkType) {
         if (!predictTheFutureChallengeInstance)
@@ -26,16 +29,16 @@ export default function PredictTheFuture(props) {
         event.preventDefault();
         if (!isComplete) {
             if (balance === "1") {
+                debugger;
                 const oneEth = props.web3.utils.toWei('1', 'ether');
                 console.log(`OnClickPredictTheFuture called`);
-                predictHelperInstance.methods.lockInGuess("0x0000000000000000000000000000000000000000000000000000000000000000").send({ from: props.accounts[0], value: oneEth }, async function (error, txHash) {
+                predictHelperInstance.methods.lockInGuess(theAnswer).send({ from: props.accounts[0], value: oneEth }, async function (error, txHash) {
                     if (error) {
                         alert(`Failed: ${error.message}`);
                     }
                     else {
-                        const blockNumber = await props.web3.eth.getBlockNumber();
-                        setLockInBlockNumber(blockNumber);
-                        console.log(`predictHelper.guess`);
+                        getTransactionReceipt(txHash, props.web3);
+                        checkCompleted();
                     }
                 });
             }
@@ -48,23 +51,49 @@ export default function PredictTheFuture(props) {
 
     const OnClickSettle = async (event) => {
         event.preventDefault();
-        await predictHelperInstance.methods.settle().send({ from: props.accounts[0] }, async function (error, txHash) {
+        setSettling(true);
+        var counter = 0;
+        // const interval = setInterval(async () => {
+            // var answer = await predictHelperInstance.methods.getAnswer().call();
+            // if (answer === '0') {
+            //     clearInterval(interval);
+                await predictHelperInstance.methods.settle().send({ from: props.accounts[0] }, async function (error, txHash) {
+                    if (error)
+                        console.log(`Failed: ${error.message}`);
+                    else {
+                        getTransactionReceipt(txHash, props.web3);
+                        checkCompleted();
+                        await predictHelperInstance.methods.withdraw().call({ from: props.accounts[0] });
+                    }
+                });
+                setSettling(false);
+            // }
+            setCalculatedAnswer(`{answer} (${++counter})`);
+        // }, 500);
+    }
+
+    const getLockinButtonStatus = () => {
+        return balance === "1" && predictHelperInstance;
+    }
+
+    const getSettleButtonStatus = () => {
+        return balance === "2" && !settling;
+    }
+
+    const OnClickWasteBlock = async () => {
+        await predictHelperInstance.methods.wasteBlock().send({ from: props.accounts[0] }, async function (error, txHash) {
             if (error)
                 console.log(`Failed: ${error.message}`);
             else {
                 getTransactionReceipt(txHash, props.web3);
-                checkCompleted();
-                await predictHelperInstance.methods.withdraw().call({ from: props.accounts[0] });
             }
         });
     }
 
-    const getLockinButtonStatus = () => {
-        return !lockInBlockNumber && balance === "1" && predictHelperInstance;
-    }
-
-    const getSettleButtonStatus = () => {
-        return balance === "2";
+    const getWasteBlockButton = () => {
+        if (props.networkType !== 'ropsten')
+            return (<button onClick={OnClickWasteBlock}>Waste block</button>);
+        return (<></>);
     }
 
     const getButton = () => {
@@ -72,31 +101,62 @@ export default function PredictTheFuture(props) {
             <>
                 <button disabled={!getLockinButtonStatus} onClick={OnClickLockIn}>Lock-in</button>
                 <button disabled={!getSettleButtonStatus} onClick={OnClickSettle}>Settle</button>
+                <button onClick={readContractData}>Read</button>
+                {getWasteBlockButton()}
             </>
         );
     }
 
     const getBlockNumberView = () => {
-        return lockInBlockNumber ? `${lockInBlockNumber}` : "";
+        return !isComplete  && balance === "2" ? `${calculatedAnswer}` : "";
+    }
+
+    /*
+    address guesser;
+    uint8 guess;
+    uint256 settlementBlockNumber;
+
+    const firstByteString = await props.web3.eth.getStorageAt(getNetworkContract(props.networkType, "guessTheRandomNumberChallengeContract"), 0);
+    const firstByte = firstByteString.substring(firstByteString.length - 2);
+    const bytes = fromHexString(firstByte);
+    */
+    const readContractData = async () => {
+        if (predictTheFutureChallengeInstance) {
+            var storage0 = await props.web3.eth.getStorageAt(predictTheFutureChallengeInstance._address, 0);
+            var storage1 = await props.web3.eth.getStorageAt(predictTheFutureChallengeInstance._address, 1);
+            console.log(`storage0: ${storage0}`);
+            console.log(`storage1: ${storage1}`);
+            alert(`storage0: ${storage0} storage1: ${storage1}`);
+        }
+    }
+
+    const sanityCheck = async () => {
+        if (sanity === undefined) {
+            var otherContract = await predictHelperInstance.methods.getOtherContract().call();
+            if (otherContract !== predictTheFutureChallengeInstance._address)
+                throw Object.assign(new Error(`helper contract ${otherContract} is wrong, should be pointing to ${predictTheFutureChallengeInstance._address}`), { code: 402 });
+            setSanity(true);
+        }
     }
 
     const checkCompleted = () => {
         if (props.web3 && props.accounts && predictHelperInstance) {
             console.log(`predictHelper.checkCompleted`);
-            predictHelperInstance.methods.isComplete().call().then(completed => setIsComplete(completed), 
+            predictHelperInstance.methods.isComplete().call().then(completed => setIsComplete(completed),
                 err => alert(`predictHelper.isComplete: ${err}`));
 
             console.log(`predictTheFuture.getBlockHashBalance`);
             props.web3.eth.getBalance(predictTheFutureChallengeInstance._address).then(balance => {
                 var wei = props.web3.utils.fromWei(balance);
                 setBalance(wei);
-            }, 
-            err => alert(`predictTheFuture.getBalance: ${err}`));
+            },
+                err => alert(`predictTheFuture.getBalance: ${err}`));
             props.web3.eth.getBalance(predictHelperInstance._address).then(balance => {
                 var wei = props.web3.utils.fromWei(balance);
                 setContractBalance(wei);
-            }, 
-            err => alert(`predictTheFuture.getBalance: ${err}`));
+            },
+                err => alert(`predictTheFuture.getBalance: ${err}`));
+            sanityCheck();
         }
     }
 

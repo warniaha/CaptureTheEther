@@ -5,13 +5,13 @@ const CaptureTheEther = artifacts.require("CaptureTheEther");
 const NicknameChallenge = artifacts.require("NicknameChallenge");
 
 module.exports = async function (deployer, network, accounts) {
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(CaptureTheEther);
   //   var captureTheEther = await CaptureTheEther.deployed();
   //   NetworkContracts.networks[network].captureTheEtherContract = captureTheEther.address;
   // }
 
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(NicknameChallenge, accounts[0]);
   //   var nicknameChallenge = await NicknameChallenge.deployed();
   //   NetworkContracts.networks[network].nicknameChallengeContract = nicknameChallenge.address;

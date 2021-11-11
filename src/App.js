@@ -13,6 +13,8 @@ import PredictTheBlock from './components/PredictTheBlock';
 import TokenSale from './components/TokenSale';
 import TokenWhale from './components/TokenWhale';
 import { getNetworkName } from './utilities/networkUtilities';
+import RetirementFund from './components/RetirementFund';
+import Mapping from './components/Mapping';
 
 const Web3 = require("web3");
 
@@ -84,6 +86,8 @@ function App() {
             <PredictTheBlock web3={web3} accounts={accounts} networkType={networkType} />
             <TokenSale web3={web3} accounts={accounts} networkType={networkType} />
             <TokenWhale web3={web3} accounts={accounts} networkType={networkType} />
+            <RetirementFund web3={web3} accounts={accounts} networkType={networkType} />
+            <Mapping web3={web3} accounts={accounts} networkType={networkType} />
           </tbody>
         </table>
       </header>

@@ -35,7 +35,11 @@ export default function GuessTheNumber (props) {
     }
 
     const getButton = () => {
-        return (<button disabled={!guessTheNumberInstance} onClick={OnClickGuessTheNumber}>Guess the number</button>);
+        return (
+            <>
+                <button disabled={!guessTheNumberInstance} onClick={OnClickGuessTheNumber}>Guess the number</button>
+            </>
+        );
     }
 
     const checkCompleted = () => {

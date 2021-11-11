@@ -17,8 +17,10 @@ export default function PredictTheBlock(props) {
     const [settlementBlock, setSettlementBlock] = React.useState(0);
 
     if (props.web3 && props.accounts && props.networkType) {
-        if (!predictTheBlockHashInstance)
-            loadInstance(predictTheBlockHashAbi, getNetworkContract(props.networkType, "predictTheBlockHashChallengeContract"), setPredictTheBlockHashInstance, props.accounts, props.web3);
+        if (!predictTheBlockHashInstance) {
+            const addr = props.web3.utils.toChecksumAddress(getNetworkContract(props.networkType, "predictTheBlockHashChallengeContract"));
+            loadInstance(predictTheBlockHashAbi, addr, setPredictTheBlockHashInstance, props.accounts, props.web3);
+        }
         if (!predictHashHelperInstance)
             loadInstance(predictHashHelperAbi, getNetworkContract(props.networkType, "predictHashHelperContract"), setPredictHashHelperInstance, props.accounts, props.web3);
     }

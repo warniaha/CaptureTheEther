@@ -7,7 +7,7 @@ const PredictTheBlockHashChallenge = artifacts.require("PredictTheBlockHashChall
 const PredictHashHelper = artifacts.require("PredictHashHelper");
 
 module.exports = async function (deployer, network, accounts) {
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(PredictTheFutureChallenge, { from: accounts[0], value: "1000000000000000000" });
   //   var predictTheFutureChallenge = await PredictTheFutureChallenge.deployed();
   //   NetworkContracts.networks[network].predictTheFutureChallengeContract = predictTheFutureChallenge.address;
@@ -17,7 +17,7 @@ module.exports = async function (deployer, network, accounts) {
   // await predictHelper.setOtherContract(NetworkContracts.networks[network].predictTheFutureChallengeContract);
   // NetworkContracts.networks[network].predictHelperContract = predictHelper.address;
 
-  // if (network === 'development') {
+  // if (network !== 'ropsten') {
   //   await deployer.deploy(PredictTheBlockHashChallenge, { from: accounts[0], value: "1000000000000000000" });
   //   var predictTheBlockHashChallenge = await PredictTheBlockHashChallenge.deployed();
   //   NetworkContracts.networks[network].predictTheBlockHashChallengeContract = predictTheBlockHashChallenge.address;

@@ -5,7 +5,6 @@ module.exports = async function (deployer, network, accounts) {
     const contractsFolder = './build/contracts';
     const targetFolder = './src/abi';
     const files = fs.readdirSync(contractsFolder);
-    // console.log(`files: ${files}`);
     files.map(file => {
         const source = path.join(contractsFolder, file);
         const target = path.join(targetFolder, file);
