@@ -15,6 +15,7 @@ import TokenWhale from './components/TokenWhale';
 import { getNetworkName } from './utilities/networkUtilities';
 import RetirementFund from './components/RetirementFund';
 import Mapping from './components/Mapping';
+import Donation from './components/Donation';
 
 const Web3 = require("web3");
 
@@ -88,6 +89,7 @@ function App() {
             <TokenWhale web3={web3} accounts={accounts} networkType={networkType} />
             <RetirementFund web3={web3} accounts={accounts} networkType={networkType} />
             <Mapping web3={web3} accounts={accounts} networkType={networkType} />
+            <Donation web3={web3} accounts={accounts} networkType={networkType} />
           </tbody>
         </table>
       </header>
