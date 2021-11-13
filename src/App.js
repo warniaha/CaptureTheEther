@@ -16,6 +16,7 @@ import { getNetworkName } from './utilities/networkUtilities';
 import RetirementFund from './components/RetirementFund';
 import Mapping from './components/Mapping';
 import Donation from './components/Donation';
+import FiftyYears from './components/FiftyYears';
 
 const Web3 = require("web3");
 
@@ -90,6 +91,7 @@ function App() {
             <RetirementFund web3={web3} accounts={accounts} networkType={networkType} />
             <Mapping web3={web3} accounts={accounts} networkType={networkType} />
             <Donation web3={web3} accounts={accounts} networkType={networkType} />
+            <FiftyYears web3={web3} accounts={accounts} networkType={networkType} />
           </tbody>
         </table>
       </header>

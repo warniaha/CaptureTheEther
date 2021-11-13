@@ -279,7 +279,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1982,
+                            "referencedDeclaration": 2175,
                             "src": "278:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -338,7 +338,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1985,
+                      "referencedDeclaration": 2178,
                       "src": "270:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -394,7 +394,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1982,
+                        "referencedDeclaration": 2175,
                         "src": "328:3:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -483,7 +483,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1995,
+                            "referencedDeclaration": 2188,
                             "src": "433:4:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_DonationChallenge_$121",
@@ -783,7 +783,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1982,
+                            "referencedDeclaration": 2175,
                             "src": "637:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -869,7 +869,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1985,
+                      "referencedDeclaration": 2178,
                       "src": "629:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -976,7 +976,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1984,
+                      "referencedDeclaration": 2177,
                       "src": "732:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1210,7 +1210,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1982,
+                            "referencedDeclaration": 2175,
                             "src": "879:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1264,7 +1264,7 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1985,
+                      "referencedDeclaration": 2178,
                       "src": "871:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1304,7 +1304,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1995,
+                              "referencedDeclaration": 2188,
                               "src": "948:4:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_DonationChallenge_$121",
@@ -1376,7 +1376,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1982,
+                          "referencedDeclaration": 2175,
                           "src": "920:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1705,7 +1705,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1985,
+                              "referencedDeclaration": 2178,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1746,7 +1746,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1982,
+                                      "referencedDeclaration": 2175,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -1836,7 +1836,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 1982,
+                                  "referencedDeclaration": 2175,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -2004,7 +2004,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1995,
+                                      "referencedDeclaration": 2188,
                                       "type": "contract DonationChallenge",
                                       "value": "this"
                                     },
@@ -2279,7 +2279,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1985,
+                              "referencedDeclaration": 2178,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2320,7 +2320,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1982,
+                                      "referencedDeclaration": 2175,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -2487,7 +2487,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1984,
+                              "referencedDeclaration": 2177,
                               "type": "uint256",
                               "value": "now"
                             },
@@ -2729,7 +2729,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1985,
+                              "referencedDeclaration": 2178,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -2770,7 +2770,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1982,
+                                      "referencedDeclaration": 2175,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -2864,7 +2864,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1982,
+                                      "referencedDeclaration": 2175,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -2934,7 +2934,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1995,
+                                      "referencedDeclaration": 2188,
                                       "type": "contract DonationChallenge",
                                       "value": "this"
                                     },
@@ -2986,9 +2986,16 @@
     "name": "solc",
     "version": "0.4.21+commit.dfe3193c.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x61C0FB13BB9296ee95aC1514346CFb188B805Aed",
+      "transactionHash": "0x90cf668cf0d59e6351a666142206b68ea01c39ae1812bf6f3b796308f3d56288"
+    }
+  },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-11T16:06:37.914Z",
+  "updatedAt": "2021-11-13T00:40:33.284Z",
   "devdoc": {
     "methods": {}
   },

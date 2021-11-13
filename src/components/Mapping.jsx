@@ -31,10 +31,11 @@ export default function Mapping (props) {
     const OnClickMapping = async (event) => {
         event.preventDefault();
         if (!isComplete) {
+            debugger;
             const keccakValue = BigNumber.from(props.web3.utils.keccak256(`0x0000000000000000000000000000000000000000000000000000000000000001`));
             const hugeIndex = BigNumber.from("2").pow("256").sub("2");
             const isCompleteIndex = BigNumber.from(`2`).pow(`256`).sub(keccakValue);
-            const hugeIndexvalue = await mappingInstance.methods.get(hugeIndex).call();
+            const hugeIndexvalue = 1;//await mappingInstance.methods.get(hugeIndex).call({ from: props.accounts[0] });
             if (hugeIndexvalue !== '1') {
                 mappingInstance.methods.set(hugeIndex, '1').send({ from: props.accounts[0] }, function (error, txHash) {
                     if (error)

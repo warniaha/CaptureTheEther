@@ -6,7 +6,7 @@ import { getTransactionReceipt } from '../utilities/getTransactionReceipt';
 
 const predictHelperAbi = require('../abi/PredictHelper.json').abi;
 const predictTheFutureChallengeAbi = require('../abi/PredictTheFutureChallenge.json').abi;
-const theAnswer = "0x0000000000000000000000000000000000000000000000000000000000000000";
+const theAnswer = "0x0000000000000000000000000000000000000000000000000000000000000006";
 
 export default function PredictTheFuture(props) {
     const [predictTheFutureChallengeInstance, setPredictTheFutureChallengeInstance] = React.useState();
@@ -17,6 +17,9 @@ export default function PredictTheFuture(props) {
     const [calculatedAnswer, setCalculatedAnswer] = React.useState("");
     const [sanity, setSanity] = React.useState();
     const [settling, setSettling] = React.useState(false);
+    const [storage0, setStorage0] = React.useState(false);
+    const [storage1, setStorage1] = React.useState(false);
+    const [storage2, setStorage2] = React.useState(false);
 
     if (props.web3 && props.accounts && props.networkType) {
         if (!predictTheFutureChallengeInstance)
@@ -108,7 +111,15 @@ export default function PredictTheFuture(props) {
     }
 
     const getBlockNumberView = () => {
-        return !isComplete  && balance === "2" ? `${calculatedAnswer}` : "";
+        return (
+            <div className="divRow">
+                <div>Calculated answer: {calculatedAnswer}</div>
+                <div>storage0: {storage0}</div>
+                <div>storage1: {storage1}</div>
+                <div>storage2: {storage2}</div>
+            </div>
+        );
+        // return !isComplete  && balance === "2" ? `${calculatedAnswer}` : "";
     }
 
     /*
@@ -156,6 +167,15 @@ export default function PredictTheFuture(props) {
                 setContractBalance(wei);
             },
                 err => alert(`predictTheFuture.getBalance: ${err}`));
+            props.web3.eth.getStorageAt(predictTheFutureChallengeInstance._address, 0).then(storage => {
+                setStorage0(storage);
+            });
+            props.web3.eth.getStorageAt(predictTheFutureChallengeInstance._address, 1).then(storage => {
+                setStorage1(storage);
+            });
+            props.web3.eth.getStorageAt(predictTheFutureChallengeInstance._address, 2).then(storage => {
+                setStorage2(storage);
+            });
             sanityCheck();
         }
     }

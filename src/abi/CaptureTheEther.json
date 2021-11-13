@@ -38,32 +38,32 @@
   "metadata": "{\"compiler\":{\"version\":\"0.4.21+commit.dfe3193c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"nickname\",\"type\":\"bytes32\"}],\"name\":\"setNickname\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"nicknameOf\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/NicknameChallenge.sol\":\"CaptureTheEther\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/NicknameChallenge.sol\":{\"keccak256\":\"0x002ab6929912b271ffbc05c0dcbdda05c96f352b829f2503eff975d07c154185\",\"urls\":[\"bzzr://d332bb4ef4acff248becbb2b8c01f146781229d094a77850f652327376e47ff2\"]}},\"version\":1}",
   "bytecode": "0x6060604052341561000f57600080fd5b61015b8061001e6000396000f30060606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680631ae8ab81146100515780636790081c14610078575b600080fd5b341561005c57600080fd5b6100766004808035600019169060200190919050506100cd565b005b341561008357600080fd5b6100af600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610117565b60405180826000191660001916815260200191505060405180910390f35b806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020816000191690555050565b600060205280600052604060002060009150905054815600a165627a7a72305820750af8c8c00056666031070199fda403d2858d3197024aebe0a4201d83d8eeaf0029",
   "deployedBytecode": "0x60606040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680631ae8ab81146100515780636790081c14610078575b600080fd5b341561005c57600080fd5b6100766004808035600019169060200190919050506100cd565b005b341561008357600080fd5b6100af600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610117565b60405180826000191660001916815260200191505060405180910390f35b806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020816000191690555050565b600060205280600052604060002060009150905054815600a165627a7a72305820750af8c8c00056666031070199fda403d2858d3197024aebe0a4201d83d8eeaf0029",
-  "sourceMap": "27:188:8:-;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "27:188:8:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;114:98;;;;;;;;;;;;;;;;;;;;;;;;;;;;;59:46;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;114:98;196:8;171:10;:22;182:10;171:22;;;;;;;;;;;;;;;:33;;;;;;;114:98;:::o;59:46::-;;;;;;;;;;;;;;;;;:::o",
+  "sourceMap": "27:188:9:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "27:188:9:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;114:98;;;;;;;;;;;;;;;;;;;;;;;;;;;;;59:46;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;114:98;196:8;171:10;:22;182:10;171:22;;;;;;;;;;;;;;;:33;;;;;;;114:98;:::o;59:46::-;;;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity 0.4.21;\r\n\r\ncontract CaptureTheEther {\r\n    mapping (address => bytes32) public nicknameOf;\r\n\r\n    function setNickname(bytes32 nickname) public {\r\n        nicknameOf[msg.sender] = nickname;\r\n    }\r\n}\r\n\r\n// Challenge contract. You don't need to do anything with this; it just verifies\r\n// that you set a nickname for yourself.\r\ncontract NicknameChallenge {\r\n    CaptureTheEther cte = CaptureTheEther(msg.sender);\r\n    address player;\r\n\r\n    // Your address gets passed in as a constructor parameter.\r\n    function NicknameChallenge(address _player) public {\r\n        player = _player;\r\n    }\r\n\r\n    // Check that the first character is not null.\r\n    function isComplete() public view returns (bool) {\r\n        return cte.nicknameOf(player)[0] != 0;\r\n    }\r\n}",
   "sourcePath": "C:\\defi\\capturetheether\\contracts\\NicknameChallenge.sol",
   "ast": {
     "absolutePath": "project:/contracts/NicknameChallenge.sol",
     "exportedSymbols": {
       "CaptureTheEther": [
-        594
+        787
       ],
       "NicknameChallenge": [
-        628
+        821
       ]
     },
-    "id": 629,
+    "id": 822,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 576,
+        "id": 769,
         "literals": [
           "solidity",
           "0.4",
           ".21"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:8"
+        "src": "0:23:9"
       },
       {
         "baseContracts": [],
@@ -71,20 +71,20 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 594,
+        "id": 787,
         "linearizedBaseContracts": [
-          594
+          787
         ],
         "name": "CaptureTheEther",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 580,
+            "id": 773,
             "name": "nicknameOf",
             "nodeType": "VariableDeclaration",
-            "scope": 594,
-            "src": "59:46:8",
+            "scope": 787,
+            "src": "59:46:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -92,28 +92,28 @@
               "typeString": "mapping(address => bytes32)"
             },
             "typeName": {
-              "id": 579,
+              "id": 772,
               "keyType": {
-                "id": 577,
+                "id": 770,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "68:7:8",
+                "src": "68:7:9",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
                   "typeString": "address"
                 }
               },
               "nodeType": "Mapping",
-              "src": "59:28:8",
+              "src": "59:28:9",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_address_$_t_bytes32_$",
                 "typeString": "mapping(address => bytes32)"
               },
               "valueType": {
-                "id": 578,
+                "id": 771,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
-                "src": "79:7:8",
+                "src": "79:7:9",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes32",
                   "typeString": "bytes32"
@@ -125,14 +125,14 @@
           },
           {
             "body": {
-              "id": 592,
+              "id": 785,
               "nodeType": "Block",
-              "src": "160:52:8",
+              "src": "160:52:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 590,
+                    "id": 783,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -141,34 +141,34 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 585,
+                        "id": 778,
                         "name": "nicknameOf",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 580,
-                        "src": "171:10:8",
+                        "referencedDeclaration": 773,
+                        "src": "171:10:9",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bytes32_$",
                           "typeString": "mapping(address => bytes32)"
                         }
                       },
-                      "id": 588,
+                      "id": 781,
                       "indexExpression": {
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 586,
+                          "id": 779,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1982,
-                          "src": "182:3:8",
+                          "referencedDeclaration": 2175,
+                          "src": "182:3:9",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 587,
+                        "id": 780,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -176,7 +176,7 @@
                         "memberName": "sender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "182:10:8",
+                        "src": "182:10:9",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -187,7 +187,7 @@
                       "isPure": false,
                       "lValueRequested": true,
                       "nodeType": "IndexAccess",
-                      "src": "171:22:8",
+                      "src": "171:22:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes32",
                         "typeString": "bytes32"
@@ -197,31 +197,31 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 589,
+                      "id": 782,
                       "name": "nickname",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 582,
-                      "src": "196:8:8",
+                      "referencedDeclaration": 775,
+                      "src": "196:8:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes32",
                         "typeString": "bytes32"
                       }
                     },
-                    "src": "171:33:8",
+                    "src": "171:33:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   },
-                  "id": 591,
+                  "id": 784,
                   "nodeType": "ExpressionStatement",
-                  "src": "171:33:8"
+                  "src": "171:33:9"
                 }
               ]
             },
             "documentation": null,
-            "id": 593,
+            "id": 786,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -229,16 +229,16 @@
             "name": "setNickname",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 583,
+              "id": 776,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 582,
+                  "id": 775,
                   "name": "nickname",
                   "nodeType": "VariableDeclaration",
-                  "scope": 593,
-                  "src": "135:16:8",
+                  "scope": 786,
+                  "src": "135:16:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -246,10 +246,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 581,
+                    "id": 774,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "135:7:8",
+                    "src": "135:7:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -259,24 +259,24 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "134:18:8"
+              "src": "134:18:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 584,
+              "id": 777,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "160:0:8"
+              "src": "160:0:9"
             },
-            "scope": 594,
-            "src": "114:98:8",
+            "scope": 787,
+            "src": "114:98:9",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 629,
-        "src": "27:188:8"
+        "scope": 822,
+        "src": "27:188:9"
       },
       {
         "baseContracts": [],
@@ -284,35 +284,35 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 628,
+        "id": 821,
         "linearizedBaseContracts": [
-          628
+          821
         ],
         "name": "NicknameChallenge",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 600,
+            "id": 793,
             "name": "cte",
             "nodeType": "VariableDeclaration",
-            "scope": 628,
-            "src": "377:49:8",
+            "scope": 821,
+            "src": "377:49:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_CaptureTheEther_$594",
+              "typeIdentifier": "t_contract$_CaptureTheEther_$787",
               "typeString": "contract CaptureTheEther"
             },
             "typeName": {
               "contractScope": null,
-              "id": 595,
+              "id": 788,
               "name": "CaptureTheEther",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 594,
-              "src": "377:15:8",
+              "referencedDeclaration": 787,
+              "src": "377:15:9",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_CaptureTheEther_$594",
+                "typeIdentifier": "t_contract$_CaptureTheEther_$787",
                 "typeString": "contract CaptureTheEther"
               }
             },
@@ -323,18 +323,18 @@
                   "argumentTypes": null,
                   "expression": {
                     "argumentTypes": null,
-                    "id": 597,
+                    "id": 790,
                     "name": "msg",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 1982,
-                    "src": "415:3:8",
+                    "referencedDeclaration": 2175,
+                    "src": "415:3:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_magic_message",
                       "typeString": "msg"
                     }
                   },
-                  "id": 598,
+                  "id": 791,
                   "isConstant": false,
                   "isLValue": false,
                   "isPure": false,
@@ -342,7 +342,7 @@
                   "memberName": "sender",
                   "nodeType": "MemberAccess",
                   "referencedDeclaration": null,
-                  "src": "415:10:8",
+                  "src": "415:10:9",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
                     "typeString": "address"
@@ -356,18 +356,18 @@
                     "typeString": "address"
                   }
                 ],
-                "id": 596,
+                "id": 789,
                 "name": "CaptureTheEther",
                 "nodeType": "Identifier",
                 "overloadedDeclarations": [],
-                "referencedDeclaration": 594,
-                "src": "399:15:8",
+                "referencedDeclaration": 787,
+                "src": "399:15:9",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_type$_t_contract$_CaptureTheEther_$594_$",
+                  "typeIdentifier": "t_type$_t_contract$_CaptureTheEther_$787_$",
                   "typeString": "type(contract CaptureTheEther)"
                 }
               },
-              "id": 599,
+              "id": 792,
               "isConstant": false,
               "isLValue": false,
               "isPure": false,
@@ -375,9 +375,9 @@
               "lValueRequested": false,
               "names": [],
               "nodeType": "FunctionCall",
-              "src": "399:27:8",
+              "src": "399:27:9",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_CaptureTheEther_$594",
+                "typeIdentifier": "t_contract$_CaptureTheEther_$787",
                 "typeString": "contract CaptureTheEther"
               }
             },
@@ -385,11 +385,11 @@
           },
           {
             "constant": false,
-            "id": 602,
+            "id": 795,
             "name": "player",
             "nodeType": "VariableDeclaration",
-            "scope": 628,
-            "src": "433:14:8",
+            "scope": 821,
+            "src": "433:14:9",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -397,10 +397,10 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 601,
+              "id": 794,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "433:7:8",
+              "src": "433:7:9",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
                 "typeString": "address"
@@ -411,26 +411,26 @@
           },
           {
             "body": {
-              "id": 611,
+              "id": 804,
               "nodeType": "Block",
-              "src": "571:35:8",
+              "src": "571:35:9",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 609,
+                    "id": 802,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 607,
+                      "id": 800,
                       "name": "player",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 602,
-                      "src": "582:6:8",
+                      "referencedDeclaration": 795,
+                      "src": "582:6:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -440,31 +440,31 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 608,
+                      "id": 801,
                       "name": "_player",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 604,
-                      "src": "591:7:8",
+                      "referencedDeclaration": 797,
+                      "src": "591:7:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "582:16:8",
+                    "src": "582:16:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 610,
+                  "id": 803,
                   "nodeType": "ExpressionStatement",
-                  "src": "582:16:8"
+                  "src": "582:16:9"
                 }
               ]
             },
             "documentation": null,
-            "id": 612,
+            "id": 805,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -472,16 +472,16 @@
             "name": "NicknameChallenge",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 605,
+              "id": 798,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 604,
+                  "id": 797,
                   "name": "_player",
                   "nodeType": "VariableDeclaration",
-                  "scope": 612,
-                  "src": "547:15:8",
+                  "scope": 805,
+                  "src": "547:15:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -489,10 +489,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 603,
+                    "id": 796,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "547:7:8",
+                    "src": "547:7:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -502,26 +502,26 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "546:17:8"
+              "src": "546:17:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 606,
+              "id": 799,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "571:0:8"
+              "src": "571:0:9"
             },
-            "scope": 628,
-            "src": "520:86:8",
+            "scope": 821,
+            "src": "520:86:9",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 626,
+              "id": 819,
               "nodeType": "Block",
-              "src": "715:56:8",
+              "src": "715:56:9",
               "statements": [
                 {
                   "expression": {
@@ -530,7 +530,7 @@
                       "typeIdentifier": "t_bytes1",
                       "typeString": "bytes1"
                     },
-                    "id": 624,
+                    "id": 817,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -542,12 +542,12 @@
                         "arguments": [
                           {
                             "argumentTypes": null,
-                            "id": 619,
+                            "id": 812,
                             "name": "player",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 602,
-                            "src": "748:6:8",
+                            "referencedDeclaration": 795,
+                            "src": "748:6:9",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -563,32 +563,32 @@
                           ],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 617,
+                            "id": 810,
                             "name": "cte",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 600,
-                            "src": "733:3:8",
+                            "referencedDeclaration": 793,
+                            "src": "733:3:9",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_CaptureTheEther_$594",
+                              "typeIdentifier": "t_contract$_CaptureTheEther_$787",
                               "typeString": "contract CaptureTheEther"
                             }
                           },
-                          "id": 618,
+                          "id": 811,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "nicknameOf",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 580,
-                          "src": "733:14:8",
+                          "referencedDeclaration": 773,
+                          "src": "733:14:9",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bytes32_$",
                             "typeString": "function (address) view external returns (bytes32)"
                           }
                         },
-                        "id": 620,
+                        "id": 813,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -596,24 +596,24 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "733:22:8",
+                        "src": "733:22:9",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
                         }
                       },
-                      "id": 622,
+                      "id": 815,
                       "indexExpression": {
                         "argumentTypes": null,
                         "hexValue": "30",
-                        "id": 621,
+                        "id": 814,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "number",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "756:1:8",
+                        "src": "756:1:9",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_rational_0_by_1",
@@ -626,7 +626,7 @@
                       "isPure": false,
                       "lValueRequested": false,
                       "nodeType": "IndexAccess",
-                      "src": "733:25:8",
+                      "src": "733:25:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes1",
                         "typeString": "bytes1"
@@ -637,14 +637,14 @@
                     "rightExpression": {
                       "argumentTypes": null,
                       "hexValue": "30",
-                      "id": 623,
+                      "id": 816,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "762:1:8",
+                      "src": "762:1:9",
                       "subdenomination": null,
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_0_by_1",
@@ -652,21 +652,21 @@
                       },
                       "value": "0"
                     },
-                    "src": "733:30:8",
+                    "src": "733:30:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 616,
-                  "id": 625,
+                  "functionReturnParameters": 809,
+                  "id": 818,
                   "nodeType": "Return",
-                  "src": "726:37:8"
+                  "src": "726:37:9"
                 }
               ]
             },
             "documentation": null,
-            "id": 627,
+            "id": 820,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": true,
@@ -674,23 +674,23 @@
             "name": "isComplete",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 613,
+              "id": 806,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "685:2:8"
+              "src": "685:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 616,
+              "id": 809,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 615,
+                  "id": 808,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 627,
-                  "src": "709:4:8",
+                  "scope": 820,
+                  "src": "709:4:9",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -698,10 +698,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 614,
+                    "id": 807,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "709:4:8",
+                    "src": "709:4:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -711,30 +711,30 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "708:6:8"
+              "src": "708:6:9"
             },
-            "scope": 628,
-            "src": "666:105:8",
+            "scope": 821,
+            "src": "666:105:9",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 629,
-        "src": "343:431:8"
+        "scope": 822,
+        "src": "343:431:9"
       }
     ],
-    "src": "0:774:8"
+    "src": "0:774:9"
   },
   "legacyAST": {
     "attributes": {
       "absolutePath": "project:/contracts/NicknameChallenge.sol",
       "exportedSymbols": {
         "CaptureTheEther": [
-          594
+          787
         ],
         "NicknameChallenge": [
-          628
+          821
         ]
       }
     },
@@ -747,9 +747,9 @@
             ".21"
           ]
         },
-        "id": 576,
+        "id": 769,
         "name": "PragmaDirective",
-        "src": "0:23:8"
+        "src": "0:23:9"
       },
       {
         "attributes": {
@@ -763,17 +763,17 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            594
+            787
           ],
           "name": "CaptureTheEther",
-          "scope": 629
+          "scope": 822
         },
         "children": [
           {
             "attributes": {
               "constant": false,
               "name": "nicknameOf",
-              "scope": 594,
+              "scope": 787,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "mapping(address => bytes32)",
@@ -791,28 +791,28 @@
                       "name": "address",
                       "type": "address"
                     },
-                    "id": 577,
+                    "id": 770,
                     "name": "ElementaryTypeName",
-                    "src": "68:7:8"
+                    "src": "68:7:9"
                   },
                   {
                     "attributes": {
                       "name": "bytes32",
                       "type": "bytes32"
                     },
-                    "id": 578,
+                    "id": 771,
                     "name": "ElementaryTypeName",
-                    "src": "79:7:8"
+                    "src": "79:7:9"
                   }
                 ],
-                "id": 579,
+                "id": 772,
                 "name": "Mapping",
-                "src": "59:28:8"
+                "src": "59:28:9"
               }
             ],
-            "id": 580,
+            "id": 773,
             "name": "VariableDeclaration",
-            "src": "59:46:8"
+            "src": "59:46:9"
           },
           {
             "attributes": {
@@ -825,7 +825,7 @@
               ],
               "name": "setNickname",
               "payable": false,
-              "scope": 594,
+              "scope": 787,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -837,7 +837,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "nickname",
-                      "scope": 593,
+                      "scope": 786,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "bytes32",
@@ -850,19 +850,19 @@
                           "name": "bytes32",
                           "type": "bytes32"
                         },
-                        "id": 581,
+                        "id": 774,
                         "name": "ElementaryTypeName",
-                        "src": "135:7:8"
+                        "src": "135:7:9"
                       }
                     ],
-                    "id": 582,
+                    "id": 775,
                     "name": "VariableDeclaration",
-                    "src": "135:16:8"
+                    "src": "135:16:9"
                   }
                 ],
-                "id": 583,
+                "id": 776,
                 "name": "ParameterList",
-                "src": "134:18:8"
+                "src": "134:18:9"
               },
               {
                 "attributes": {
@@ -871,9 +871,9 @@
                   ]
                 },
                 "children": [],
-                "id": 584,
+                "id": 777,
                 "name": "ParameterList",
-                "src": "160:0:8"
+                "src": "160:0:9"
               },
               {
                 "children": [
@@ -906,13 +906,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 580,
+                                  "referencedDeclaration": 773,
                                   "type": "mapping(address => bytes32)",
                                   "value": "nicknameOf"
                                 },
-                                "id": 585,
+                                "id": 778,
                                 "name": "Identifier",
-                                "src": "171:10:8"
+                                "src": "171:10:9"
                               },
                               {
                                 "attributes": {
@@ -932,23 +932,23 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 1982,
+                                      "referencedDeclaration": 2175,
                                       "type": "msg",
                                       "value": "msg"
                                     },
-                                    "id": 586,
+                                    "id": 779,
                                     "name": "Identifier",
-                                    "src": "182:3:8"
+                                    "src": "182:3:9"
                                   }
                                 ],
-                                "id": 587,
+                                "id": 780,
                                 "name": "MemberAccess",
-                                "src": "182:10:8"
+                                "src": "182:10:9"
                               }
                             ],
-                            "id": 588,
+                            "id": 781,
                             "name": "IndexAccess",
-                            "src": "171:22:8"
+                            "src": "171:22:9"
                           },
                           {
                             "attributes": {
@@ -956,38 +956,38 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 582,
+                              "referencedDeclaration": 775,
                               "type": "bytes32",
                               "value": "nickname"
                             },
-                            "id": 589,
+                            "id": 782,
                             "name": "Identifier",
-                            "src": "196:8:8"
+                            "src": "196:8:9"
                           }
                         ],
-                        "id": 590,
+                        "id": 783,
                         "name": "Assignment",
-                        "src": "171:33:8"
+                        "src": "171:33:9"
                       }
                     ],
-                    "id": 591,
+                    "id": 784,
                     "name": "ExpressionStatement",
-                    "src": "171:33:8"
+                    "src": "171:33:9"
                   }
                 ],
-                "id": 592,
+                "id": 785,
                 "name": "Block",
-                "src": "160:52:8"
+                "src": "160:52:9"
               }
             ],
-            "id": 593,
+            "id": 786,
             "name": "FunctionDefinition",
-            "src": "114:98:8"
+            "src": "114:98:9"
           }
         ],
-        "id": 594,
+        "id": 787,
         "name": "ContractDefinition",
-        "src": "27:188:8"
+        "src": "27:188:9"
       },
       {
         "attributes": {
@@ -1001,17 +1001,17 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            628
+            821
           ],
           "name": "NicknameChallenge",
-          "scope": 629
+          "scope": 822
         },
         "children": [
           {
             "attributes": {
               "constant": false,
               "name": "cte",
-              "scope": 628,
+              "scope": 821,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "contract CaptureTheEther",
@@ -1022,12 +1022,12 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "CaptureTheEther",
-                  "referencedDeclaration": 594,
+                  "referencedDeclaration": 787,
                   "type": "contract CaptureTheEther"
                 },
-                "id": 595,
+                "id": 788,
                 "name": "UserDefinedTypeName",
-                "src": "377:15:8"
+                "src": "377:15:9"
               },
               {
                 "attributes": {
@@ -1055,13 +1055,13 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 594,
+                      "referencedDeclaration": 787,
                       "type": "type(contract CaptureTheEther)",
                       "value": "CaptureTheEther"
                     },
-                    "id": 596,
+                    "id": 789,
                     "name": "Identifier",
-                    "src": "399:15:8"
+                    "src": "399:15:9"
                   },
                   {
                     "attributes": {
@@ -1081,34 +1081,34 @@
                           "overloadedDeclarations": [
                             null
                           ],
-                          "referencedDeclaration": 1982,
+                          "referencedDeclaration": 2175,
                           "type": "msg",
                           "value": "msg"
                         },
-                        "id": 597,
+                        "id": 790,
                         "name": "Identifier",
-                        "src": "415:3:8"
+                        "src": "415:3:9"
                       }
                     ],
-                    "id": 598,
+                    "id": 791,
                     "name": "MemberAccess",
-                    "src": "415:10:8"
+                    "src": "415:10:9"
                   }
                 ],
-                "id": 599,
+                "id": 792,
                 "name": "FunctionCall",
-                "src": "399:27:8"
+                "src": "399:27:9"
               }
             ],
-            "id": 600,
+            "id": 793,
             "name": "VariableDeclaration",
-            "src": "377:49:8"
+            "src": "377:49:9"
           },
           {
             "attributes": {
               "constant": false,
               "name": "player",
-              "scope": 628,
+              "scope": 821,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "address",
@@ -1121,14 +1121,14 @@
                   "name": "address",
                   "type": "address"
                 },
-                "id": 601,
+                "id": 794,
                 "name": "ElementaryTypeName",
-                "src": "433:7:8"
+                "src": "433:7:9"
               }
             ],
-            "id": 602,
+            "id": 795,
             "name": "VariableDeclaration",
-            "src": "433:14:8"
+            "src": "433:14:9"
           },
           {
             "attributes": {
@@ -1141,7 +1141,7 @@
               ],
               "name": "NicknameChallenge",
               "payable": false,
-              "scope": 628,
+              "scope": 821,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -1153,7 +1153,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_player",
-                      "scope": 612,
+                      "scope": 805,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1166,19 +1166,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 603,
+                        "id": 796,
                         "name": "ElementaryTypeName",
-                        "src": "547:7:8"
+                        "src": "547:7:9"
                       }
                     ],
-                    "id": 604,
+                    "id": 797,
                     "name": "VariableDeclaration",
-                    "src": "547:15:8"
+                    "src": "547:15:9"
                   }
                 ],
-                "id": 605,
+                "id": 798,
                 "name": "ParameterList",
-                "src": "546:17:8"
+                "src": "546:17:9"
               },
               {
                 "attributes": {
@@ -1187,9 +1187,9 @@
                   ]
                 },
                 "children": [],
-                "id": 606,
+                "id": 799,
                 "name": "ParameterList",
-                "src": "571:0:8"
+                "src": "571:0:9"
               },
               {
                 "children": [
@@ -1212,13 +1212,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 602,
+                              "referencedDeclaration": 795,
                               "type": "address",
                               "value": "player"
                             },
-                            "id": 607,
+                            "id": 800,
                             "name": "Identifier",
-                            "src": "582:6:8"
+                            "src": "582:6:9"
                           },
                           {
                             "attributes": {
@@ -1226,33 +1226,33 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 604,
+                              "referencedDeclaration": 797,
                               "type": "address",
                               "value": "_player"
                             },
-                            "id": 608,
+                            "id": 801,
                             "name": "Identifier",
-                            "src": "591:7:8"
+                            "src": "591:7:9"
                           }
                         ],
-                        "id": 609,
+                        "id": 802,
                         "name": "Assignment",
-                        "src": "582:16:8"
+                        "src": "582:16:9"
                       }
                     ],
-                    "id": 610,
+                    "id": 803,
                     "name": "ExpressionStatement",
-                    "src": "582:16:8"
+                    "src": "582:16:9"
                   }
                 ],
-                "id": 611,
+                "id": 804,
                 "name": "Block",
-                "src": "571:35:8"
+                "src": "571:35:9"
               }
             ],
-            "id": 612,
+            "id": 805,
             "name": "FunctionDefinition",
-            "src": "520:86:8"
+            "src": "520:86:9"
           },
           {
             "attributes": {
@@ -1265,7 +1265,7 @@
               ],
               "name": "isComplete",
               "payable": false,
-              "scope": 628,
+              "scope": 821,
               "stateMutability": "view",
               "superFunction": null,
               "visibility": "public"
@@ -1278,9 +1278,9 @@
                   ]
                 },
                 "children": [],
-                "id": 613,
+                "id": 806,
                 "name": "ParameterList",
-                "src": "685:2:8"
+                "src": "685:2:9"
               },
               {
                 "children": [
@@ -1288,7 +1288,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "",
-                      "scope": 627,
+                      "scope": 820,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "bool",
@@ -1301,25 +1301,25 @@
                           "name": "bool",
                           "type": "bool"
                         },
-                        "id": 614,
+                        "id": 807,
                         "name": "ElementaryTypeName",
-                        "src": "709:4:8"
+                        "src": "709:4:9"
                       }
                     ],
-                    "id": 615,
+                    "id": 808,
                     "name": "VariableDeclaration",
-                    "src": "709:4:8"
+                    "src": "709:4:9"
                   }
                 ],
-                "id": 616,
+                "id": 809,
                 "name": "ParameterList",
-                "src": "708:6:8"
+                "src": "708:6:9"
               },
               {
                 "children": [
                   {
                     "attributes": {
-                      "functionReturnParameters": 616
+                      "functionReturnParameters": 809
                     },
                     "children": [
                       {
@@ -1375,7 +1375,7 @@
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "member_name": "nicknameOf",
-                                      "referencedDeclaration": 580,
+                                      "referencedDeclaration": 773,
                                       "type": "function (address) view external returns (bytes32)"
                                     },
                                     "children": [
@@ -1385,18 +1385,18 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 600,
+                                          "referencedDeclaration": 793,
                                           "type": "contract CaptureTheEther",
                                           "value": "cte"
                                         },
-                                        "id": 617,
+                                        "id": 810,
                                         "name": "Identifier",
-                                        "src": "733:3:8"
+                                        "src": "733:3:9"
                                       }
                                     ],
-                                    "id": 618,
+                                    "id": 811,
                                     "name": "MemberAccess",
-                                    "src": "733:14:8"
+                                    "src": "733:14:9"
                                   },
                                   {
                                     "attributes": {
@@ -1404,18 +1404,18 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 602,
+                                      "referencedDeclaration": 795,
                                       "type": "address",
                                       "value": "player"
                                     },
-                                    "id": 619,
+                                    "id": 812,
                                     "name": "Identifier",
-                                    "src": "748:6:8"
+                                    "src": "748:6:9"
                                   }
                                 ],
-                                "id": 620,
+                                "id": 813,
                                 "name": "FunctionCall",
-                                "src": "733:22:8"
+                                "src": "733:22:9"
                               },
                               {
                                 "attributes": {
@@ -1430,14 +1430,14 @@
                                   "type": "int_const 0",
                                   "value": "0"
                                 },
-                                "id": 621,
+                                "id": 814,
                                 "name": "Literal",
-                                "src": "756:1:8"
+                                "src": "756:1:9"
                               }
                             ],
-                            "id": 622,
+                            "id": 815,
                             "name": "IndexAccess",
-                            "src": "733:25:8"
+                            "src": "733:25:9"
                           },
                           {
                             "attributes": {
@@ -1452,39 +1452,39 @@
                               "type": "int_const 0",
                               "value": "0"
                             },
-                            "id": 623,
+                            "id": 816,
                             "name": "Literal",
-                            "src": "762:1:8"
+                            "src": "762:1:9"
                           }
                         ],
-                        "id": 624,
+                        "id": 817,
                         "name": "BinaryOperation",
-                        "src": "733:30:8"
+                        "src": "733:30:9"
                       }
                     ],
-                    "id": 625,
+                    "id": 818,
                     "name": "Return",
-                    "src": "726:37:8"
+                    "src": "726:37:9"
                   }
                 ],
-                "id": 626,
+                "id": 819,
                 "name": "Block",
-                "src": "715:56:8"
+                "src": "715:56:9"
               }
             ],
-            "id": 627,
+            "id": 820,
             "name": "FunctionDefinition",
-            "src": "666:105:8"
+            "src": "666:105:9"
           }
         ],
-        "id": 628,
+        "id": 821,
         "name": "ContractDefinition",
-        "src": "343:431:8"
+        "src": "343:431:9"
       }
     ],
-    "id": 629,
+    "id": 822,
     "name": "SourceUnit",
-    "src": "0:774:8"
+    "src": "0:774:9"
   },
   "compiler": {
     "name": "solc",
@@ -1499,7 +1499,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-11T16:06:43.304Z",
+  "updatedAt": "2021-11-13T00:42:58.100Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

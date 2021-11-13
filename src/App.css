@@ -42,3 +42,10 @@
   justify-content: center;
   flex-direction: row;
 }
+
+.divRow {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 0.4em;
+}

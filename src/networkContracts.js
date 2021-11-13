@@ -1,9 +1,9 @@
 module.exports = {
     "networks": {
         "ropsten": {
-            "predictTheFutureChallengeContract": "0xD3BC863c266249C334B38a7C66849465B6549798",
+            "predictTheFutureChallengeContract": "0x93efE11DF0AAe50E4F8231B7AE9802c79602Aa2c",
             "captureTheEtherContract": "0x71c46Ed333C35e4E6c62D32dc7C8F00D125b4fee",
-            "predictHelperContract": "0xb725c83ef0c2f40CB86239Bfa2795Ea9764AC5C2",
+            "predictHelperContract": "0x80Da8Cd641bAf4668d6F00a5Ad2d7437d035f574",
             "callMeChallengeContract": "0x5bf22dABEC518515887DB0838D4dDc927DaaA01A",
             "nicknameChallengeContract": "0x71c46Ed333C35e4E6c62D32dc7C8F00D125b4fee",
             "cheatTheNewNumberContract": "0x48A082a0f95db7848B7d2897D5d8355D781B8909",
@@ -20,7 +20,8 @@ module.exports = {
             "RetirementFundChallengeContract": "0x5E7a9d832fDF08Aa557C2611AFc5277314eD2dfa",
             "RetirementFundAttackerContract": "0x557b1BB4894a1545088D58eE0199322809A599C9",
             "MappingChallengeContract": "0xcc22ffFb9a4375D6bf8A5a85d624c216732883Fc",
-            "DonationChallengeContract": "0x07A3c17582796c5dA2d44a464c5572faCb038346"
+            "DonationChallengeContract": "0x07A3c17582796c5dA2d44a464c5572faCb038346",
+            "FiftyYearsChallengeContract": "0x999FDa97f87E1A8e14d24b105a6b9E582c9eC0A3"
         },
         "development": {
             "predictTheFutureChallengeContract": "0x474392ff7ee1D4D57618db7156EC63aB57825C59",
@@ -43,7 +44,8 @@ module.exports = {
             "readStorageContract": "0xA475CB551Efe78f557bB6bA00B8fD5c5bC482420",
             "RetirementFundAttackerContract": "0x7F1dB19a4D5B1A8dbb7ec5ba6535795E1949D316",
             "MappingChallengeContract": "0xE1d697Bf0164Fc6300d164A60740009643522816",
-            "DonationChallengeContract": "0x61C0FB13BB9296ee95aC1514346CFb188B805Aed"
+            "DonationChallengeContract": "0x61C0FB13BB9296ee95aC1514346CFb188B805Aed",
+            "FiftyYearsChallengeContract": "0xd57253C4D7DD8fC706b62a965C0d3767Cab44342"
         }
     }
 };
