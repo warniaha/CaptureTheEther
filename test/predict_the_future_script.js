@@ -33,7 +33,7 @@ module.exports = function (callback) {
                     console.log(`Starting loop with answer: ${guess.toNumber()}`);
                     attempts[guess] = '0123456789'[guess];
                     await predictHelper.settle({from: accounts[0]});
-                    return;
+                    done();
                 }
                 catch {
                     var counter = 0;
