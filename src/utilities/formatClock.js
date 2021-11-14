@@ -1,4 +1,4 @@
-export default function formatClock(seconds) {
+exports.formatClock = function(seconds) {
     var numhours = parseInt(Math.floor(((seconds % 31536000) % 86400) / 3600), 10);
     var numminutes = parseInt(Math.floor((((seconds % 31536000) % 86400) % 3600) / 60), 10);
     var numseconds = parseInt((((seconds % 31536000) % 86400) % 3600) % 60, 10);

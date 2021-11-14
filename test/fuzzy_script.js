@@ -1,5 +1,3 @@
-
-
 const artifacts = require('../build/contracts/FuzzyIdentityHelper.json')
 const contract = require('truffle-contract');
 const { BigNumber, ethers } = require('ethers');
@@ -7,11 +5,12 @@ const { BigNumber, ethers } = require('ethers');
 const FuzzyIdentityHelper = contract(artifacts);
 FuzzyIdentityHelper.setProvider(web3.currentProvider);
 const crypto = require('crypto');
+const { formatClock } = require('../src/utilities/formatClock');
 
 // truffle exec ./test/fuzzy_script.js --network development
 
 const findMatchingPrivateKey = () => {
-    const startTime = Date.now().getSeconds();
+    const startTime = Date.now()/1000;
     const NONCE = BigNumber.from(`0`);
     let foundKey = undefined;
     // choose 512 bits of randomness like BIP39 would for when deriving seed from mnemonic
@@ -35,7 +34,7 @@ const findMatchingPrivateKey = () => {
 
         counter++;
         if (counter % 1000 == 0) {
-            const elapsedTime = Date.now().getSeconds() - startTime;
+            const elapsedTime = Date.now()/1000 - startTime;
             process.stdout.write(`Checked ${counter} addresses in ${formatClock(elapsedTime)}\r`);
         }
     }
