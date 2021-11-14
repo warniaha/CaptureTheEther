@@ -14,12 +14,11 @@ export default function PredictTheFuture(props) {
     const [isComplete, setIsComplete] = React.useState(undefined);
     const [balance, setBalance] = React.useState(0);
     const [contractBalance, setContractBalance] = React.useState(0);
-    const [calculatedAnswer, setCalculatedAnswer] = React.useState("");
     const [sanity, setSanity] = React.useState();
     const [settling, setSettling] = React.useState(false);
-    const [storage0, setStorage0] = React.useState(false);
-    const [storage1, setStorage1] = React.useState(false);
-    const [storage2, setStorage2] = React.useState(false);
+    const [guess, setGuess] = React.useState(false);
+    const [guesser, setGuesser] = React.useState(false);
+    const [settlementBlockNumber, setSettlementBlockNumber] = React.useState(false);
 
     if (props.web3 && props.accounts && props.networkType) {
         if (!predictTheFutureChallengeInstance)
@@ -55,24 +54,16 @@ export default function PredictTheFuture(props) {
     const OnClickSettle = async (event) => {
         event.preventDefault();
         setSettling(true);
-        var counter = 0;
-        // const interval = setInterval(async () => {
-            // var answer = await predictHelperInstance.methods.getAnswer().call();
-            // if (answer === '0') {
-            //     clearInterval(interval);
-                await predictHelperInstance.methods.settle().send({ from: props.accounts[0] }, async function (error, txHash) {
-                    if (error)
-                        console.log(`Failed: ${error.message}`);
-                    else {
-                        getTransactionReceipt(txHash, props.web3);
-                        checkCompleted();
-                        await predictHelperInstance.methods.withdraw().call({ from: props.accounts[0] });
-                    }
-                });
-                setSettling(false);
-            // }
-            setCalculatedAnswer(`{answer} (${++counter})`);
-        // }, 500);
+        await predictHelperInstance.methods.settle().send({ from: props.accounts[0] }, async function (error, txHash) {
+            if (error)
+                console.log(`Failed: ${error.message}`);
+            else {
+                getTransactionReceipt(txHash, props.web3);
+                checkCompleted();
+                await predictHelperInstance.methods.withdraw().call({ from: props.accounts[0] });
+            }
+        });
+        setSettling(false);
     }
 
     const getLockinButtonStatus = () => {
@@ -111,12 +102,12 @@ export default function PredictTheFuture(props) {
     }
 
     const getBlockNumberView = () => {
+        const styleColor = parseInt(guesser) === 0 && !isComplete ? "red" : "white";
         return (
             <div className="divRow">
-                <div>Calculated answer: {calculatedAnswer}</div>
-                <div>storage0: {storage0}</div>
-                <div>storage1: {storage1}</div>
-                <div>storage2: {storage2}</div>
+                <div>guess: {guess}</div>
+                <div style={{ color: styleColor }}>guesser: {guesser}</div>
+                <div>settlementBlockNumber: {settlementBlockNumber}</div>
             </div>
         );
         // return !isComplete  && balance === "2" ? `${calculatedAnswer}` : "";
@@ -168,13 +159,11 @@ export default function PredictTheFuture(props) {
             },
                 err => alert(`predictTheFuture.getBalance: ${err}`));
             props.web3.eth.getStorageAt(predictTheFutureChallengeInstance._address, 0).then(storage => {
-                setStorage0(storage);
+                setGuess(parseInt(storage.substr(24, 2), 16));
+                setGuesser("0x" + storage.substr(26));
             });
             props.web3.eth.getStorageAt(predictTheFutureChallengeInstance._address, 1).then(storage => {
-                setStorage1(storage);
-            });
-            props.web3.eth.getStorageAt(predictTheFutureChallengeInstance._address, 2).then(storage => {
-                setStorage2(storage);
+                setSettlementBlockNumber(parseInt(storage, 16));
             });
             sanityCheck();
         }

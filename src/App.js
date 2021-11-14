@@ -17,6 +17,7 @@ import RetirementFund from './components/RetirementFund';
 import Mapping from './components/Mapping';
 import Donation from './components/Donation';
 import FiftyYears from './components/FiftyYears';
+import FuzzyIdentity from './components/FuzzyIdentity';
 
 const Web3 = require("web3");
 
@@ -92,6 +93,7 @@ function App() {
             <Mapping web3={web3} accounts={accounts} networkType={networkType} />
             <Donation web3={web3} accounts={accounts} networkType={networkType} />
             <FiftyYears web3={web3} accounts={accounts} networkType={networkType} />
+            <FuzzyIdentity web3={web3} accounts={accounts} networkType={networkType} />
           </tbody>
         </table>
       </header>
